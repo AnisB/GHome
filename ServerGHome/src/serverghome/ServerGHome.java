@@ -1,15 +1,17 @@
-    /*
-    * To change this template, choose Tools | Templates
-    * and open the template in the editor.
-    */
-    package serverghome;
-    import java.io.BufferedReader;
-    import java.io.IOException;
-    import java.io.PrintWriter;
-    import java.net.InetAddress;
-    import java.net.ServerSocket;
-    import java.net.Socket;
-    import java.net.UnknownHostException;
+/*
+* To change this template, choose Tools | Templates
+* and open the template in the editor.
+*/
+package serverghome;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
     /**
@@ -18,11 +20,13 @@ import java.util.logging.Logger;
     */
     public class ServerGHome extends Thread{
         
-        public 
+        protected 
             boolean serverOn;
+            Map<InetAddress,ComClient> myClientMap;
             
         public ServerGHome()
         {
+            myClientMap=new HashMap<InetAddress,ComClient>();
             serverOn=true;
         }
     @Override
@@ -38,11 +42,26 @@ import java.util.logging.Logger;
 			System.out.println("Le serveur est à l'écoute du port "+socketserver.getLocalPort());
                         while(serverOn)
                         {
-                            Socket socketduserveur ;
-                            socketduserveur = socketserver.accept();
-                            ComClient aNewComClient =  new ComClient(socketserver,socketduserveur);
-                            aNewComClient.start();
-        
+                            System.out.println("remise en attente");
+                            Socket client ;
+                            client = socketserver.accept();
+                            System.out.println("trucrecu");
+                            if(myClientMap.get(client.getInetAddress())!=null)        
+                            {
+                                 out = new PrintWriter(client.getOutputStream());
+                                 out.println("C0");
+                                 out.flush();
+                                 System.out.println("Deja repertorie");
+                                
+                            }
+                            else
+                            {
+                                 System.out.println("Nouveau");
+                                 ComClient aNewComClient =  new ComClient(socketserver,client,this);
+                                 myClientMap.put(client.getInetAddress(), aNewComClient);
+                                 aNewComClient.start();
+                            }
+
 
                         }
 		        
@@ -56,4 +75,18 @@ import java.util.logging.Logger;
             Logger.getLogger(ServerGHome.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
+    public synchronized void removeClient(InetAddress address)
+    {
+        System.out.println("Client supprime");
+        System.out.println(myClientMap.size());
+        myClientMap.remove(address);
+        System.out.println(myClientMap.size());
+
+    }
+        public synchronized void sendClick()
+    {
+        System.out.println("Click recu");
+
+
+    }
     }
