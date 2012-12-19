@@ -46,14 +46,17 @@ public class ComClient extends Thread{
                 in = new BufferedReader (new InputStreamReader (myClient.getInputStream()));
                 String message = in.readLine();            
                 System.out.println("message recu"+message);
-                out.println("J'ai recu ton message");
-                out.flush();
                 System.out.println(message.compareTo("D"));
-                if(message.equals("D"))            
+                if (message.equals("D"))            
                 {
                     myClientConnected=false;
                     myClient.close();
                     myHost.removeClient(myClient.getInetAddress());
+                }
+                if(message.equals("A"))
+                {
+                    out.println("A"+myHost.getNbClick());
+                    out.flush();
                 }
             }
 

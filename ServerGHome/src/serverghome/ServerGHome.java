@@ -21,11 +21,13 @@ import java.util.logging.Logger;
     public class ServerGHome extends Thread{
         
         protected 
+            int nbClick;
             boolean serverOn;
             Map<InetAddress,ComClient> myClientMap;
             
         public ServerGHome()
         {
+            nbClick=0;
             myClientMap=new HashMap<InetAddress,ComClient>();
             serverOn=true;
         }
@@ -85,8 +87,13 @@ import java.util.logging.Logger;
     }
         public synchronized void sendClick()
     {
+        nbClick++;
         System.out.println("Click recu");
 
 
     }
+        public synchronized int getNbClick()
+        {
+            return nbClick;
+        }
     }
