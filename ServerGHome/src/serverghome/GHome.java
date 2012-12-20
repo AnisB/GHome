@@ -15,7 +15,6 @@ public class GHome {
         System.out.println("Application begin");
         ServerGHome myServer = new ServerGHome();
         myServer.start();
-                
         Api api = new Api(myServer);
         api.start();
         System.out.println("Serveur lancé");
