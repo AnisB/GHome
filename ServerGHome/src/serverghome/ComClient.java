@@ -73,7 +73,7 @@ public class ComClient extends Thread{
                         break;
                     // THe termianl asks for the room temprature
                     case 'T':
-                        out.println("A"+myHost.getNbClick());
+                        out.println("T"+myHost.getNbClick());
                         out.flush();
                         break;    
                     default:
