@@ -38,7 +38,8 @@ public class MainActivity extends Activity {
 				
 				try   
 		        {  
-		            socket = new Socket("if219-09.insa-lyon.fr", 2011);  
+//		            socket = new Socket("if219-09.insa-lyon.fr", 2011); 
+					socket = new Socket("134.214.105.28", 8880);
 		              
 		            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));  
 		            out = new PrintWriter(socket.getOutputStream(), true);  
