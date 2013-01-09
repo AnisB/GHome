@@ -5,42 +5,92 @@
     tools:context=".MainActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textViewLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
+        android:layout_marginTop="14dp"
+        android:text="@string/login" />
 
     <EditText
         android:id="@+id/editTextLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/textViewLogin"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="57dp"
         android:ems="10"
-        android:inputType="textPersonName" >
+        android:inputType="textPersonName" />
 
-        <requestFocus />
-    </EditText>
+    <TextView
+        android:id="@+id/textViewPW"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextLogin"
+        android:layout_centerHorizontal="true"
+        android:text="@string/password" />
 
     <EditText
         android:id="@+id/editTextPW"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView1"
-        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@+id/editTextLogin"
+        android:layout_below="@+id/textViewPW"
         android:ems="10"
         android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/textViewIP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextPW"
+        android:layout_centerHorizontal="true"
+        android:text="@string/ip" />
+
+    <EditText
+        android:id="@+id/editTextIP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextPW"
+        android:layout_below="@+id/textViewIP"
+        android:ems="10"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextIP"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:text="@string/hello_world" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/editTextIP"
+        android:layout_alignTop="@+id/editTextIP"
+        android:ems="10"
+        android:inputType="textMultiLine" />
 
     <Button
         android:id="@+id/buttonConnect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="78dp"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_toRightOf="@+id/log"
         android:text="@string/buttonConnection" />
+
+    <EditText
+        android:id="@+id/log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="21dp"
+        android:ems="10"
+        android:inputType="textMultiLine" />
 
 </RelativeLayout>

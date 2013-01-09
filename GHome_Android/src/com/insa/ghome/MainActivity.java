@@ -4,18 +4,23 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 //import android.view.Menu;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
 	private TextView coucou = null;
+	private EditText log = null;
+
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +28,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         
         coucou = (TextView)findViewById(R.id.textView1);
+        log = (EditText)findViewById(R.id.log);
+
         coucou.setText(R.string.hello_world);
         final Button bConnect = (Button)findViewById(R.id.buttonConnect);
         bConnect.setOnClickListener(new View.OnClickListener() {
@@ -31,7 +38,12 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				coucou.setText("on a clique");
+				try {
+					coucou.setText(InetAddress.getLocalHost().toString());
+				} catch (UnknownHostException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				Socket socket;
 				BufferedReader in;
 				PrintWriter out; 
@@ -39,14 +51,15 @@ public class MainActivity extends Activity {
 				try   
 		        {  
 //		            socket = new Socket("if219-09.insa-lyon.fr", 2011); 
-					socket = new Socket("134.214.105.28", 8880);
-		              
+//					socket = new Socket("134.214.105.28", 8880);
+					socket = new Socket(InetAddress.getLocalHost(), 8880);
+		            log.append(InetAddress.getLocalHost().toString());
 		            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));  
 		            out = new PrintWriter(socket.getOutputStream(), true);  
 		            BufferedReader line = new BufferedReader(new InputStreamReader(System.in));  
 		  
 //		            out.println(line.readLine());  
-		            out.println("A");  
+		            out.println("C");  
 		              
 		            line.close();  
 		            out.close();  
@@ -55,6 +68,7 @@ public class MainActivity extends Activity {
 		            socket.close();  
 		              
 		        } catch (IOException e) {  
+		        	System.out.println("hello");
 		        }  
 			}
 		});
