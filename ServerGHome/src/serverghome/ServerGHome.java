@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modele.Click;
+import service.Service;
     /**
     *
     * @author anisbenyoub
@@ -24,13 +26,19 @@ import java.util.logging.Logger;
             int nbClick;
             boolean serverOn;
             Map<InetAddress,ComClient> myClientMap;
+            Service serviceManager;
             
         public ServerGHome()
         {
             nbClick=0;
             myClientMap=new HashMap<InetAddress,ComClient>();
             serverOn=true;
+            serviceManager= new Service();
         }
+
+    public Service getServiceManager() {
+        return serviceManager;
+    }
     @Override
         public  void run() 
         {
@@ -85,15 +93,20 @@ import java.util.logging.Logger;
         System.out.println(myClientMap.size());
 
     }
-        public synchronized void sendClick()
+        public synchronized void sendClick(int buttonID)
     {
-        nbClick++;
+        Click aClick = new Click(buttonID);
+        try {
+            serviceManager.addClick(aClick);
+        } catch (Exception ex) {
+            Logger.getLogger(ServerGHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println("Click recu");
 
 
     }
         public synchronized int getNbClick()
         {
-            return nbClick;
+            return serviceManager.getNbClick();
         }
     }

@@ -5,14 +5,21 @@
 package modele;
 
 import java.util.Date;
+import javax.persistence.*;
 
 /**
  *
  * @author anisbenyoub
  */
+@Entity
 public class Data {
-    protected
-        Date mHeure;
+    
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected   Integer id;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    protected        Date mHeure;
 
     public Date getmHeure() {
         return mHeure;

@@ -10,11 +10,9 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import serverghome.ServerGHome;
 
-
 public class Api extends Thread{
 
-    protected
-             ServerGHome myServer;
+    protected ServerGHome myServer;
     /**
      * @param args
      */
@@ -32,7 +30,7 @@ public class Api extends Thread{
 
         try {
 
-            socket = new Socket("134.214.105.28", 5000);
+            socket = new Socket("127.0.0.1", 1337);
             System.out.println("Demande de connexion");
 
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -42,9 +40,9 @@ public class Api extends Thread{
                 int message_distant = in.read(testChar);
 
                 String test = new String(testChar);
-                if (test.startsWith("CBE2")) {
+                if (test.equals("A55A0B05000000000021CBE220FE")) {
                     System.out.println("clic !");
-                    myServer.sendClick();
+                    myServer.sendClick(0);
                 }
                 else if(test.startsWith("B291")){
                     System.out.println("Fenêtre 1 !");

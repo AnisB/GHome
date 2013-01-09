@@ -9,7 +9,7 @@ import javax.persistence.Persistence;
 public class JpaUtil {
 
     // TODO Changer le nom du persistence unit
-    private static final String NAME_PERSISTENCE_UNIT = "PredictifPU";
+    private static final String NAME_PERSISTENCE_UNIT = "GHomePU";
     private static EntityManagerFactory emf;
     private static ThreadLocal<EntityManager> tl = new ThreadLocal<EntityManager>();
 
