@@ -29,4 +29,9 @@ public class Actionneur {
     public Capteur.Type getMonType() {
         return monType;
     }
+    
+    public void print()
+    {
+        System.out.println("Actionneur");
+    }
 }

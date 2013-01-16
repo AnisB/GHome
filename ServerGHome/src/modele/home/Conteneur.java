@@ -33,9 +33,18 @@ public class Conteneur {
         return id;
     }
 
-    public void print()
+     public  void print()
     {
-        System.out.print("Hi");
+        System.out.print("Contenueur : nom "+nom);
+        for(Capteur c : mesCapteurs)
+        {
+            c.print();
+        }
+        
+        for(Actionneur a : mesActionneurs)
+        {
+            a.print();
+        }
     }
     public List<Actionneur> getMesActionneurs() {
         return mesActionneurs;

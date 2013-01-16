@@ -3,6 +3,8 @@
 * and open the template in the editor.
 */
 package serverghome;
+import Interface.MapLieu;
+import Interface.Window;
 import XMLParser.Crafter;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,6 +48,9 @@ import service.Service;
         {
         try {
             Crafter aHomeCrafter = new Crafter("../map.xml");
+            
+            Window uneMap = new Window(aHomeCrafter.getLieu());
+            uneMap.setVisible(true);
         } catch (DocumentException ex) {
             System.out.println("Problème d'accès au fichier map");
         }

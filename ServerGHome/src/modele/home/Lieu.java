@@ -30,12 +30,33 @@ public class Lieu {
         mesPieces= new ArrayList<Piece>();
         mesAcces = new ArrayList<Acces>();
     }
+
+    public List<Acces> getMesAcces() {
+        return mesAcces;
+    }
+
+    public List<Piece> getMesPieces() {
+        return mesPieces;
+    }
     
     public void addPiece(Piece newPiece)
     {
         mesPieces.add(newPiece);
     }
         
+    public void print()
+    {
+        System.out.println("Lieu : nom "+nomLieu);
+        for(Piece p : mesPieces)
+        {
+            p.print();
+        }
+        
+        for(Acces a : mesAcces)
+        {
+            a.print();
+        }
+    }
     public void addAcces(Acces newAcces)
     {
         mesAcces.add(newAcces);

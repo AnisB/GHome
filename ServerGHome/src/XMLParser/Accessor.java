@@ -31,10 +31,12 @@ public class Accessor {
                   if(row.getQualifiedName().equals("piece"))
                   {
                       Piece nouvellePiece = new Piece(Integer.parseInt(row.attribute("id").getValue()),
-                                                    row.attribute("nom").toString(),
+                                                    row.attribute("nom").getValue(),
                                                     Integer.parseInt(row.attribute("posx").getValue()),
                                                     Integer.parseInt(row.attribute("posy").getValue()),
-                                                    Float.valueOf(row.attribute("etage").getValue()));
+                                                    Float.valueOf(row.attribute("etage").getValue()),
+                                                    Integer.parseInt(row.attribute("largex").getValue()),
+                                                    Integer.parseInt(row.attribute("largey").getValue()));
                       Iterator itr2 = row.elementIterator();
                       while(itr2.hasNext())
                       {
@@ -59,10 +61,12 @@ public class Accessor {
                   else if(row.getQualifiedName().equals("acces"))
                   {
                       Acces nouvelAcces= new Acces(Integer.parseInt(row.attribute("id").getValue()),
-                                                    row.attribute("nom").toString(),
+                                                    row.attribute("nom").getValue(),
                                                     Integer.parseInt(row.attribute("posx").getValue()),
                                                     Integer.parseInt(row.attribute("posy").getValue()),
-                                                    Float.valueOf(row.attribute("etage").getValue()));
+                                                    Float.valueOf(row.attribute("etage").getValue()),
+                                                    Integer.parseInt(row.attribute("taillex").getValue()),
+                                                    Integer.parseInt(row.attribute("tailley").getValue()));
                       
  
                     Iterator itr2 = row.elementIterator();

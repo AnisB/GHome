@@ -11,17 +11,18 @@ package modele.home;
  */
 public class Piece extends Conteneur{
 
-        public Piece(Integer id, String nom) {
-        this.id = id;
-        this.nom = nom;
+        public Integer largeurX;
+        public Integer largeurY;
 
-    }
-    public Piece(Integer id, String nom, Integer x, Integer y, Float etage) {
+    public Piece(Integer id, String nom, Integer x, Integer y, Float etage, Integer lX, Integer lY) {
         this.id = id;
         this.nom = nom;
         this.x = x;
         this.y = y;
         this.etage = etage;
+        this.largeurX=lX;
+        this.largeurY=lY;
+                
     }
 
 

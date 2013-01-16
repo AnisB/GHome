@@ -12,8 +12,11 @@ import java.util.List;
  * @author anisbenyoub
  */
 public class Acces extends Conteneur{
+    public
     List<Piece> mesVoisins;
-        public Acces(Integer id, String nom, Integer x, Integer y, Float etage) {
+    public int taillex;
+    public int tailley;
+        public Acces(Integer id, String nom, Integer x, Integer y, Float etage, int taillex, int tailley) {
             super();
         this.id = id;
         this.nom = nom;
@@ -21,6 +24,8 @@ public class Acces extends Conteneur{
         this.y = y;
         this.etage = etage;
         this.mesVoisins= new ArrayList<Piece>();
+        this.taillex=taillex;
+        this.tailley=tailley;
     }
 
     public List<Piece> getMesVoisins() {

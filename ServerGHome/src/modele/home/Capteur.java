@@ -33,5 +33,8 @@ public class Capteur {
     public Type getMonType() {
         return monType;
     }
-    
+    public void print()
+    {
+        System.out.println("Catpeur");
+    }
 }

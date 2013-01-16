@@ -13,11 +13,15 @@ import org.dom4j.DocumentException;
  * @author anisbenyoub
  */
 public class Crafter {
+    protected Lieu monLieu;
     public Crafter(String aPath) throws DocumentException
     {
         Document aDoc=XMLReader.read(aPath);
-        Lieu newLieu = Accessor.fullfill(aDoc);
-        //newLieu.print();
+        monLieu= Accessor.fullfill(aDoc);
+    }
+    public Lieu getLieu()
+    {
+        return monLieu;
     }
     
 }
