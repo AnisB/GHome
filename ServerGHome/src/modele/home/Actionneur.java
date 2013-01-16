@@ -18,7 +18,10 @@ public class Actionneur {
     Integer id;
     Piece lieu;
     Capteur.Type monType;
-
+    public Actionneur(int theid, String type,Conteneur p)
+    {
+        this.id=theid;
+    }
     public Integer getId() {
         return id;
     }

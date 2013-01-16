@@ -22,6 +22,10 @@ public class Capteur {
     Piece lieu;
     Type monType;
 
+    public Capteur(int theid, String type,Conteneur p)
+    {
+        this.id=theid;
+    }
     public Integer getId() {
         return id;
     }

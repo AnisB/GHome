@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Acces extends Conteneur{
     List<Piece> mesVoisins;
-        public Acces(Integer id, String nom, Integer x, Integer y, Integer etage) {
+        public Acces(Integer id, String nom, Integer x, Integer y, Float etage) {
             super();
         this.id = id;
         this.nom = nom;

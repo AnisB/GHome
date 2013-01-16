@@ -57,4 +57,16 @@ public class Lieu {
         this.nomLieu = nomLieu;
     }
     
+    public Piece getPieceByID(int id)
+    {
+        for(Piece piece: mesPieces)
+        {
+            if(id==piece.getId())
+            {
+                 return piece;
+            }
+        }
+        return null;
+    }
+    
 }

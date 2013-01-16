@@ -4,6 +4,7 @@
  */
 package XMLParser;
 
+import modele.home.Lieu;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 
@@ -15,7 +16,8 @@ public class Crafter {
     public Crafter(String aPath) throws DocumentException
     {
         Document aDoc=XMLReader.read(aPath);
-        Accessor.fullfill(aDoc);
+        Lieu newLieu = Accessor.fullfill(aDoc);
+        //newLieu.print();
     }
     
 }

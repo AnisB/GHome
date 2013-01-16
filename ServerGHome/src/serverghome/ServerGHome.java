@@ -45,9 +45,9 @@ import service.Service;
         public  void run() 
         {
         try {
-            Crafter aHomeCrafter = new Crafter("/Users/anisbenyoub/Documents/Developpement/GHome/map.xml");
+            Crafter aHomeCrafter = new Crafter("../map.xml");
         } catch (DocumentException ex) {
-            Logger.getLogger(ServerGHome.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Problème d'accès au fichier map");
         }
                 ServerSocket socketserver = null  ;
 		BufferedReader in;

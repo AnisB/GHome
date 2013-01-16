@@ -16,10 +16,10 @@ public class Conteneur {
     protected String nom;
     protected Integer x;
     protected Integer y;
-    protected Integer etage;
+    protected Float etage;
     protected List<Capteur> mesCapteurs;
     protected List<Actionneur> mesActionneurs;
-        public Integer getEtage() {
+        public Float getEtage() {
         return etage;
     }
 
@@ -33,12 +33,24 @@ public class Conteneur {
         return id;
     }
 
+    public void print()
+    {
+        System.out.print("Hi");
+    }
     public List<Actionneur> getMesActionneurs() {
         return mesActionneurs;
     }
 
     public List<Capteur> getMesCapteurs() {
         return mesCapteurs;
+    }
+    
+        public void addActionneur(Actionneur act) {
+         mesActionneurs.add(act);
+    }
+
+    public void addCapteur(Capteur capt) {
+        mesCapteurs.add(capt);
     }
 
     public String getNom() {
