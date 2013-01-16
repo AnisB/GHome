@@ -4,6 +4,7 @@
  */
 package modele.home;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,6 +14,7 @@ import java.util.List;
 public class Acces extends Conteneur{
     List<Piece> mesVoisins;
         public Acces(Integer id, String nom, Integer x, Integer y, Integer etage) {
+            super();
         this.id = id;
         this.nom = nom;
         this.x = x;

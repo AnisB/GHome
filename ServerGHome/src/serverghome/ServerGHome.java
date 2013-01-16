@@ -3,6 +3,7 @@
 * and open the template in the editor.
 */
 package serverghome;
+import XMLParser.Crafter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +16,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modele.Click;
+import org.dom4j.DocumentException;
 import service.Service;
     /**
     *
@@ -42,13 +44,18 @@ import service.Service;
     @Override
         public  void run() 
         {
+        try {
+            Crafter aHomeCrafter = new Crafter("/Users/anisbenyoub/Documents/Developpement/GHome/map.xml");
+        } catch (DocumentException ex) {
+            Logger.getLogger(ServerGHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
                 ServerSocket socketserver = null  ;
 		BufferedReader in;
 		PrintWriter out;
 		
 		try {
 		
-			socketserver = new ServerSocket(8880);
+			socketserver = new ServerSocket(4500);
 			System.out.println("Le serveur est à l'écoute du port "+socketserver.getLocalPort());
                         while(serverOn)
                         {

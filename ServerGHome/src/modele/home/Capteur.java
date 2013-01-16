@@ -21,4 +21,13 @@ public class Capteur {
     Integer id;
     Piece lieu;
     Type monType;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Type getMonType() {
+        return monType;
+    }
+    
 }
