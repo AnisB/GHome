@@ -16,12 +16,9 @@ public class Conteneur {
     protected String nom;
     protected Integer x;
     protected Integer y;
-    protected Float etage;
     protected List<Capteur> mesCapteurs;
     protected List<Actionneur> mesActionneurs;
-        public Float getEtage() {
-        return etage;
-    }
+
 
     public Conteneur() {
         this.mesCapteurs = new ArrayList<Capteur>();

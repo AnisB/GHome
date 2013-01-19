@@ -25,6 +25,7 @@ public class Capteur {
     public Capteur(int theid, String type,Conteneur p)
     {
         this.id=theid;
+        monType=Type.AUTRE;
     }
     public Integer getId() {
         return id;

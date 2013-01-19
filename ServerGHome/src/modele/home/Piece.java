@@ -13,8 +13,9 @@ public class Piece extends Conteneur{
 
         public Integer largeurX;
         public Integer largeurY;
+        public Integer etage;
 
-    public Piece(Integer id, String nom, Integer x, Integer y, Float etage, Integer lX, Integer lY) {
+    public Piece(Integer id, String nom, Integer x, Integer y, Integer etage, Integer lX, Integer lY) {
         this.id = id;
         this.nom = nom;
         this.x = x;

@@ -16,7 +16,8 @@ public class Acces extends Conteneur{
     List<Piece> mesVoisins;
     public int taillex;
     public int tailley;
-        public Acces(Integer id, String nom, Integer x, Integer y, Float etage, int taillex, int tailley) {
+    public Integer etage;
+        public Acces(Integer id, String nom, Integer x, Integer y, Integer etage, int taillex, int tailley) {
             super();
         this.id = id;
         this.nom = nom;

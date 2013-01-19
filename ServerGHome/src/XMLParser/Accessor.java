@@ -23,7 +23,8 @@ public class Accessor {
         Lieu endroit= new Lieu();
         endroit.setMonType(root.attribute("type").getValue());
         endroit.setNomLieu(root.attribute("nom").getValue());
-        
+        endroit.setNbEtage(Integer.valueOf(root.attribute("nbEtage").getValue()));
+
         
         for ( Iterator i = root.elementIterator(); i.hasNext(); ) 
            {
@@ -34,7 +35,7 @@ public class Accessor {
                                                     row.attribute("nom").getValue(),
                                                     Integer.parseInt(row.attribute("posx").getValue()),
                                                     Integer.parseInt(row.attribute("posy").getValue()),
-                                                    Float.valueOf(row.attribute("etage").getValue()),
+                                                    Integer.valueOf(row.attribute("etage").getValue()),
                                                     Integer.parseInt(row.attribute("largex").getValue()),
                                                     Integer.parseInt(row.attribute("largey").getValue()));
                       Iterator itr2 = row.elementIterator();
@@ -60,11 +61,12 @@ public class Accessor {
                   }
                   else if(row.getQualifiedName().equals("acces"))
                   {
+
                       Acces nouvelAcces= new Acces(Integer.parseInt(row.attribute("id").getValue()),
                                                     row.attribute("nom").getValue(),
                                                     Integer.parseInt(row.attribute("posx").getValue()),
                                                     Integer.parseInt(row.attribute("posy").getValue()),
-                                                    Float.valueOf(row.attribute("etage").getValue()),
+                                                    Integer.valueOf(row.attribute("etage").getValue()),
                                                     Integer.parseInt(row.attribute("taillex").getValue()),
                                                     Integer.parseInt(row.attribute("tailley").getValue()));
                       
@@ -90,6 +92,7 @@ public class Accessor {
                                   nouvelAcces.addVoisin(endroit.getPieceByID(Integer.parseInt(subObjet.attribute("id").getValue())));
                             }
                       }
+
                       endroit.addAcces(nouvelAcces);
 
                     }

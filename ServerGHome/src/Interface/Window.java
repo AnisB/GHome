@@ -4,6 +4,7 @@
  */
 package Interface;
 
+import java.awt.List;
 import modele.home.Lieu;
 
 /**
@@ -21,15 +22,21 @@ public class Window extends javax.swing.JFrame {
     }
     public Window(Lieu a) {
         initComponents();
-        map = new MapLieu(a);
-        map.setBounds(0, 0, 400, 400);
+        map = new MapLieu(a,this);
+        map.setBounds(0, 0, 400*a.nombreEtage, 400);
         map.setVisible(true);
         this.add(map);
+        this.setSize( 400*a.nombreEtage, 800);
 
     }
 void update()
 {
 }
+
+    public List getList1() {
+        return list1;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,17 +46,25 @@ void update()
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        list1 = new java.awt.List();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 400, Short.MAX_VALUE)
+            .add(layout.createSequentialGroup()
+                .addContainerGap()
+                .add(list1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 224, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(166, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 300, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(91, Short.MAX_VALUE)
+                .add(list1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 199, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -97,5 +112,6 @@ void update()
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.List list1;
     // End of variables declaration//GEN-END:variables
 }
