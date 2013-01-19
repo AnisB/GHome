@@ -5,8 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.Enumeration;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -20,6 +23,7 @@ public class MainActivity extends Activity {
 
 	private TextView coucou = null;
 	private EditText log = null;
+	private TextView ip = null;
 
 	
     @Override
@@ -29,6 +33,8 @@ public class MainActivity extends Activity {
         
         coucou = (TextView)findViewById(R.id.textView1);
         log = (EditText)findViewById(R.id.log);
+        ip = (TextView)findViewById(R.id.editTextIP);
+        ip.setText("10.0.2.2");
 
         coucou.setText(R.string.hello_world);
         final Button bConnect = (Button)findViewById(R.id.buttonConnect);
@@ -37,43 +43,17 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				try {
-					coucou.setText(InetAddress.getLocalHost().toString());
-				} catch (UnknownHostException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				Socket socket;
-				BufferedReader in;
-				PrintWriter out; 
+				String serverAddress = ip.getText().toString();
+				log.append(serverAddress);
 				
-				try   
-		        {  
-//		            socket = new Socket("if219-09.insa-lyon.fr", 2011); 
-//					socket = new Socket("134.214.105.28", 8880);
-					socket = new Socket(InetAddress.getLocalHost(), 8880);
-		            log.append(InetAddress.getLocalHost().toString());
-		            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));  
-		            out = new PrintWriter(socket.getOutputStream(), true);  
-		            BufferedReader line = new BufferedReader(new InputStreamReader(System.in));  
-		  
-//		            out.println(line.readLine());  
-		            out.println("C");  
-		              
-		            line.close();  
-		            out.close();  
-		            in.close();  
-		              
-		            socket.close();  
-		              
-		        } catch (IOException e) {  
-		        	System.out.println("hello");
-		        }  
+	            Thread emission = new Thread(new EmissionThread(serverAddress));
+				
+	            emission.start();
 			}
 		});
 //        setContentView(R.layout.activity_main);
     }
+    
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
