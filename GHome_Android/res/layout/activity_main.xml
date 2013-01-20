@@ -54,7 +54,8 @@
         android:layout_alignLeft="@+id/editTextPW"
         android:layout_below="@+id/textViewIP"
         android:ems="10"
-        android:inputType="text" />
+        android:inputType="text"
+        android:text="10.0.0.2" />
 
     <TextView
         android:id="@+id/textView1"
@@ -64,15 +65,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="22dp"
         android:text="@string/hello_world" />
-
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/editTextIP"
-        android:layout_alignTop="@+id/editTextIP"
-        android:ems="10"
-        android:inputType="textMultiLine" />
 
     <Button
         android:id="@+id/buttonConnect"

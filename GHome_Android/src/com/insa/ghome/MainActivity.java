@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
 
 	private TextView coucou = null;
 	private EditText log = null;
-	private TextView ip = null;
+	private EditText ip = null;
 
 	
     @Override
@@ -33,8 +33,7 @@ public class MainActivity extends Activity {
         
         coucou = (TextView)findViewById(R.id.textView1);
         log = (EditText)findViewById(R.id.log);
-        ip = (TextView)findViewById(R.id.editTextIP);
-        ip.setText("10.0.2.2");
+        ip = (EditText)findViewById(R.id.editTextIP);
 
         coucou.setText(R.string.hello_world);
         final Button bConnect = (Button)findViewById(R.id.buttonConnect);
