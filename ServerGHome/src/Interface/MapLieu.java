@@ -28,12 +28,35 @@ public class MapLieu extends javax.swing.JPanel {
         selected=-1;
         myWindow=w;
     }
+    public void addComposant(String ID, String type1, String type2)
+    {
+        Conteneur conT =monLieu.getPieceByID(selected);
+        if(type1.equals("Capteur"))
+        {
+            Capteur c= new Capteur(ID,type2,conT);
+            conT.addCapteur(c);
+            myWindow.getList1().removeAll();
+            for(Capteur cP: conT.getMesCapteurs())
+            {
+                myWindow.getList1().add("Type: "+cP.getMonType().toString()+" Id: "+cP.getId());
+            } 
+        }
+        else
+        {
+            Actionneur a= new Actionneur(ID,type2,conT);
+            conT.addActionneur(a);
+            myWindow.getList1().removeAll();
+            for(Capteur cP: conT.getMesCapteurs())
+            {
+                myWindow.getList1().add("Type: "+cP.getMonType().toString()+" Id: "+cP.getId());
+            } 
+        }
 
+    }
     public void drawMap(Graphics g)
     {
         for(int i=0; i<monLieu.nombreEtage;i++)
         {
-          //  System.out.println("Hi"+(0 +400*i)+' '+ 0+' '+ (400+400*i)+' '+ 400);
         g.setColor(Color.lightGray);
         g.fillRect(0 +400*i, 0, 400, 400);
         g.setColor(Color.black);
@@ -90,20 +113,29 @@ public class MapLieu extends javax.swing.JPanel {
         {
              if(p.deleteCapteur(CID))
              {
+                myWindow.getList1().removeAll();
+                for(Capteur cP: p.getMesCapteurs())
+                {
+                    myWindow.getList1().add("Type: "+cP.getMonType().toString()+" Id: "+cP.getId());
+                } 
                  break;
              }
  
         }
-        for(Acces p:monLieu.getListAcces())
+        for(Acces a:monLieu.getListAcces())
         {
-             if(p.deleteCapteur(CID))
-             {
+             if(a.deleteCapteur(CID))
+             {                 
+                myWindow.getList1().removeAll();
+                for(Capteur cP: a.getMesCapteurs())
+                {
+                    myWindow.getList1().add("Type: "+cP.getMonType().toString()+" Id: "+cP.getId());
+                } 
                  break;
              }
         }
-
-
-        }}
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -171,6 +203,7 @@ public class MapLieu extends javax.swing.JPanel {
         }
                
         this.updateUI();
+        myWindow.testToAdd();
 
     }//GEN-LAST:event_formMouseReleased
 
