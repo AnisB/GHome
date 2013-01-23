@@ -50,7 +50,7 @@ public class Accessor {
                             }
                             else if(subObjet.getQualifiedName().equals("actionneur"))
                             {
-                                Actionneur newActionneur = new Actionneur(subObjet.attribute("id").getValue(),
+                                Actionneur newActionneur = new Actionneur(Integer.parseInt(subObjet.attribute("id").getValue()),
                                                     subObjet.attribute("type").getValue(),nouvellePiece);
                                 nouvellePiece.addActionneur(newActionneur);
                             }
@@ -83,7 +83,7 @@ public class Accessor {
                             }
                             else if(subObjet.getQualifiedName().equals("actionneur"))
                             {
-                                Actionneur newActionneur = new Actionneur(subObjet.attribute("id").getValue(),
+                                Actionneur newActionneur = new Actionneur(Integer.parseInt(subObjet.attribute("id").getValue()),
                                                     subObjet.attribute("type").getValue(),nouvelAcces);
                                 nouvelAcces.addActionneur(newActionneur);
                             }

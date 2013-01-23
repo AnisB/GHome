@@ -53,6 +53,7 @@ import service.Service;
             
             Window uneMap = new Window(aHomeCrafter.getLieu());
             monLieu=aHomeCrafter.getLieu();
+            
             uneMap.setVisible(true);
         } catch (DocumentException ex) {
             System.out.println("Problème d'accès au fichier map");
@@ -130,7 +131,7 @@ import service.Service;
             return serviceManager.getNbClick();
         }
 
-    public Lieu getMonLieu() {
+    public synchronized Lieu getMonLieu() {
         return monLieu;
     }
         

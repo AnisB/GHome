@@ -1,35 +1,35 @@
 <lieu nom="myHome" type="maison" nbEtage="3">
 	<piece id="0" nom="Sejour" posx="0" posy="0" etage="0" largex="65" largey="100">
-		<capteur id="0" type="Interrupteur"/>
-		<capteur id="1" type="Temperature"/>
+		<capteur id="0021CBE2" type="Interrupteur"/>
+		<capteur id="00893382" type="Temperature"/>
 	</piece>
 	
 	<piece id="1" nom="Chambre Marian" posx="70" posy="70" etage="0" largex="50" largey="80">
 		<actionneur id="0" type="Lumiere"/>
-		<capteur id="2" type="Interrupteur"/>
+		<capteur id="0021CBE2" type="Interrupteur"/>
 	</piece>
 	
 
 	<piece id="2" nom="Chambre Fred" posx="70" posy="0" etage="0" largex="70" largey="65">
 		<actionneur id="0" type="Lumiere"/>
-		<capteur id="2" type="Interrupteur"/>
+		<capteur id="0021CBE2" type="Interrupteur"/>
 	</piece>
 	
 
 	
 	
 	<piece id="4" nom="Salon japonais" posx="0" posy="0" etage="1" largex="65" largey="100">
-		<capteur id="3" type="Interrupteur"/>
-		<capteur id="4" type="Temperature"/>
+		<capteur id="0021CBE2" type="Interrupteur"/>
+		<capteur id="00893382" type="Temperature"/>
 	</piece>
 
 	<piece id="6" nom="Chambre d'amis" posx="0" posy="0" etage="2" largex="135" largey="120">
-		<capteur id="5" type="Interrupteur"/>
-		<capteur id="6" type="Temperature"/>
+		<capteur id="0021CBE2" type="Interrupteur"/>
+		<capteur id="00893382" type="Temperature"/>
 	</piece>
 	<piece id="7" nom="Sejour" posx="140" posy="80" etage="2" largex="140" largey="80">
-		<capteur id="7" type="Interrupteur"/>
-		<capteur id="8" type="Temperature"/>
+		<capteur id="0021CBE2" type="Interrupteur"/>
+		<capteur id="00893382" type="Temperature"/>
 	</piece>
 		
 	<acces id="8" nom="Porte" posx="65" posy="80" etage="0" taillex="5" tailley="20">
