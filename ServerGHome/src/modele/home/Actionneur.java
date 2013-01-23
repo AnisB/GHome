@@ -15,14 +15,14 @@ public class Actionneur {
         CHAUFFAGE,
         AUTRE;
     }
-    Integer id;
+    String id;
     Piece lieu;
     Capteur.Type monType;
-    public Actionneur(int theid, String type,Conteneur p)
+    public Actionneur(String theid, String type,Conteneur p)
     {
         this.id=theid;
     }
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
