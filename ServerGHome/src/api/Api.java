@@ -115,6 +115,7 @@ public class Api extends Thread{
     }
     
     private void AnalyseTemperature(String id, String trame){
-        
+        String temperature = new String(trame.substring(13, 14));
+        System.out.println((float)40-(float)40*(float)((float)Integer.parseInt(temperature, 16)/(float)255));
     }
 }
