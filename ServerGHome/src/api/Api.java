@@ -36,7 +36,7 @@ public class Api extends Thread{
         PrintWriter out;
 
         try {
-            socket = new Socket("127.0.0.1", 1337);
+            socket = new Socket("134.214.105.28", 5000);
             System.out.println("Demande de connexion");
 
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
