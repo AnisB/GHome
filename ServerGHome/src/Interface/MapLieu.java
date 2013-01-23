@@ -85,14 +85,11 @@ public class MapLieu extends javax.swing.JPanel {
         if (selected!=-1)
         {
         String CID=content.split("Id: ")[1];
-        System.out.println("To delete: "+CID);
 
         for(Piece p:monLieu.getListPieces())
         {
-             System.out.println("une piece");
              if(p.deleteCapteur(CID))
              {
-                System.out.println("Found");
                  break;
              }
  
@@ -101,7 +98,6 @@ public class MapLieu extends javax.swing.JPanel {
         {
              if(p.deleteCapteur(CID))
              {
-                 System.out.println("Found");
                  break;
              }
         }

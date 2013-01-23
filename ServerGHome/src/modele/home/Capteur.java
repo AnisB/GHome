@@ -25,7 +25,6 @@ public class Capteur {
     public Capteur(String theid, String type,Conteneur p)
     {
         this.id=theid;
-        System.out.println(type);
         if(type.equals("Interrupteur"))
         {
              monType=Type.INTERRUPTEUR;

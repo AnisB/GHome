@@ -75,12 +75,11 @@ public class Conteneur {
     {
         boolean found=false;
         Capteur cx=null;
-        System.out.println("A trouver "+id);
         for(Capteur c: mesCapteurs)
         {
-            System.out.println("Actuel "+c.getId());
-            if(c.id.equals(id))
+            if(c.getId().equals(id))
             {
+                found=true;
                 cx=c;
                 break;
             }
