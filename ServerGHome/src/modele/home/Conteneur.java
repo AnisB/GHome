@@ -70,4 +70,28 @@ public class Conteneur {
     public Integer getY() {
         return y;
     }
+    
+    public boolean deleteCapteur(String id)
+    {
+        boolean found=false;
+        Capteur cx=null;
+        for(Capteur c: mesCapteurs)
+        {
+            if(c.getId().equals(id))
+            {
+                found=true;
+                cx=c;
+                break;
+            }
+        }
+        if(found)
+        {
+            mesCapteurs.remove(cx);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

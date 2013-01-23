@@ -29,8 +29,9 @@ public class Window extends javax.swing.JFrame {
         this.setSize( 400*a.nombreEtage, 800);
 
     }
-void update()
+void setDeleteEnable(boolean a)
 {
+    deleteButton.setEnabled(a);
 }
 
     public List getList1() {
@@ -47,8 +48,20 @@ void update()
     private void initComponents() {
 
         list1 = new java.awt.List();
+        jLabel1 = new javax.swing.JLabel();
+        deleteButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Capteurs et Actionneurs");
+
+        deleteButton.setText("Delete");
+        deleteButton.setEnabled(false);
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -56,19 +69,32 @@ void update()
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(list1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 224, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(166, Short.MAX_VALUE))
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(layout.createSequentialGroup()
+                        .add(list1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 224, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(deleteButton))
+                    .add(jLabel1))
+                .addContainerGap(345, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(91, Short.MAX_VALUE)
-                .add(list1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 199, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(65, Short.MAX_VALUE)
+                .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 16, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(deleteButton)
+                    .add(list1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 199, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        map.deleteCalled(list1.getSelectedItem());
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,6 +138,8 @@ void update()
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton deleteButton;
+    private javax.swing.JLabel jLabel1;
     private java.awt.List list1;
     // End of variables declaration//GEN-END:variables
 }

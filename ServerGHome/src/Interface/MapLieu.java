@@ -49,7 +49,6 @@ public class MapLieu extends javax.swing.JPanel {
             }
             else
             {
-                System.out.println("a");
                 g.setColor(Color.RED);
             }            g.fillRect(p.getX()+400*i, p.getY(), p.largeurX, p.largeurY);
             g.setColor(Color.blue);
@@ -65,8 +64,6 @@ public class MapLieu extends javax.swing.JPanel {
             }
             else
             {
-                                System.out.println("a");
-
                 g.setColor(Color.RED);
             }
             g.fillRect(a.getX()+400*i, a.getY(), a.taillex, a.tailley);
@@ -83,6 +80,30 @@ public class MapLieu extends javax.swing.JPanel {
 
 	}
 
+    void deleteCalled(String content)
+    {
+        if (selected!=-1)
+        {
+        String CID=content.split("Id: ")[1];
+
+        for(Piece p:monLieu.getListPieces())
+        {
+             if(p.deleteCapteur(CID))
+             {
+                 break;
+             }
+ 
+        }
+        for(Acces p:monLieu.getListAcces())
+        {
+             if(p.deleteCapteur(CID))
+             {
+                 break;
+             }
+        }
+
+
+        }}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -115,8 +136,9 @@ public class MapLieu extends javax.swing.JPanel {
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         int q = (int)evt.getX()/400;
-        System.out.println(q);
         Conteneur c=null;
+        myWindow.getList1().removeAll();
+        selected=-1;
         for(Piece p:monLieu.getMesPieces().get(q))
         {
             if((p.getX()<(evt.getX()%400))&&(p.getY()<(evt.getY()))&&
@@ -137,10 +159,15 @@ public class MapLieu extends javax.swing.JPanel {
         }
         if(c!=null)
         {
+            myWindow.setDeleteEnable(true);
             for(Capteur cP: c.getMesCapteurs())
             {
-                myWindow.getList1().add(cP.getMonType().toString());
+                myWindow.getList1().add("Type: "+cP.getMonType().toString()+" Id: "+cP.getId());
             }
+        }
+        else
+        {
+            myWindow.setDeleteEnable(false);
         }
                
         this.updateUI();

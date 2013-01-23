@@ -99,21 +99,43 @@ public class Lieu {
         this.nomLieu = nomLieu;
     }
     
-    public Piece getPieceByID(int id)
+    public List<Piece> getListPieces()
     {
-        /*
-        for(Piece piece: mesPieces)
+        List<Piece> l = new ArrayList<Piece>();
+        for(int i=0; i<mesPieces.size();i++)
         {
-            if(id==piece.getId())
+            for(Piece p: mesPieces.get(i))
             {
-                 return piece;
+                l.add(p);
             }
         }
-        * 
-        */
-        return null;
+        return l;
     }
      
+     public List<Acces> getListAcces()
+    {
+        List<Acces> l = new ArrayList<Acces>();
+        for(int i=0; i<mesAcces.size();i++)
+        {
+            for(Acces p: mesAcces.get(i))
+            {
+                l.add(p);
+            }
+        }
+        return l;
+    }
     
+    public Piece getPieceByID(Integer id)
+    {
+        List<Piece> l = getListPieces();
+        for(Piece p : l)
+        {
+            if (p.getId().equals(id))
+            {
+                return p;
+            }
+        }
+        return null;
+    }
     
 }

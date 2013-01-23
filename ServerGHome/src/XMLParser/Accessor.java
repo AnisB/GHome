@@ -44,14 +44,14 @@ public class Accessor {
                             Element subObjet=(Element) itr2.next();
                             if(subObjet.getQualifiedName().equals("capteur"))
                             {
-                                Capteur newCapteur = new Capteur(Integer.parseInt(subObjet.attribute("id").getValue()),
-                                                    subObjet.attribute("type").toString(),nouvellePiece);
+                                Capteur newCapteur = new Capteur(subObjet.attribute("id").getValue(),
+                                                    subObjet.attribute("type").getValue(),nouvellePiece);
                                 nouvellePiece.addCapteur(newCapteur);
                             }
                             else if(subObjet.getQualifiedName().equals("actionneur"))
                             {
                                 Actionneur newActionneur = new Actionneur(Integer.parseInt(subObjet.attribute("id").getValue()),
-                                                    subObjet.attribute("type").toString(),nouvellePiece);
+                                                    subObjet.attribute("type").getValue(),nouvellePiece);
                                 nouvellePiece.addActionneur(newActionneur);
                             }
                             
@@ -77,14 +77,14 @@ public class Accessor {
                             Element subObjet=(Element) itr2.next();
                             if(subObjet.getQualifiedName().equals("capteur"))
                             {
-                                Capteur newCapteur = new Capteur(Integer.parseInt(subObjet.attribute("id").getValue()),
-                                                    subObjet.attribute("type").toString(),nouvelAcces);
+                                Capteur newCapteur = new Capteur(subObjet.attribute("id").getValue(),
+                                                    subObjet.attribute("type").getValue(),nouvelAcces);
                                 nouvelAcces.addCapteur(newCapteur);
                             }
                             else if(subObjet.getQualifiedName().equals("actionneur"))
                             {
                                 Actionneur newActionneur = new Actionneur(Integer.parseInt(subObjet.attribute("id").getValue()),
-                                                    subObjet.attribute("type").toString(),nouvelAcces);
+                                                    subObjet.attribute("type").getValue(),nouvelAcces);
                                 nouvelAcces.addActionneur(newActionneur);
                             }
                             else if(subObjet.getQualifiedName().equals("piecevoisine"))

@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modele.Click;
+import modele.home.Lieu;
 import org.dom4j.DocumentException;
 import service.Service;
     /**
@@ -31,6 +32,7 @@ import service.Service;
             boolean serverOn;
             Map<InetAddress,ComClient> myClientMap;
             Service serviceManager;
+            Lieu monLieu;
             
         public ServerGHome()
         {
@@ -50,6 +52,7 @@ import service.Service;
             Crafter aHomeCrafter = new Crafter("../map.xml");
             
             Window uneMap = new Window(aHomeCrafter.getLieu());
+            monLieu=aHomeCrafter.getLieu();
             uneMap.setVisible(true);
         } catch (DocumentException ex) {
             System.out.println("Problème d'accès au fichier map");
@@ -121,4 +124,9 @@ import service.Service;
         {
             return serviceManager.getNbClick();
         }
+
+    public Lieu getMonLieu() {
+        return monLieu;
+    }
+        
     }
