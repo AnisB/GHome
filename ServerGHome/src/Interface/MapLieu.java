@@ -117,6 +117,8 @@ public class MapLieu extends javax.swing.JPanel {
         int q = (int)evt.getX()/400;
         System.out.println(q);
         Conteneur c=null;
+        myWindow.getList1().removeAll();
+        selected=-1;
         for(Piece p:monLieu.getMesPieces().get(q))
         {
             if((p.getX()<(evt.getX()%400))&&(p.getY()<(evt.getY()))&&
