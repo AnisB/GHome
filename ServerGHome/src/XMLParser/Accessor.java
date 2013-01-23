@@ -44,7 +44,7 @@ public class Accessor {
                             Element subObjet=(Element) itr2.next();
                             if(subObjet.getQualifiedName().equals("capteur"))
                             {
-                                Capteur newCapteur = new Capteur(Integer.parseInt(subObjet.attribute("id").getValue()),
+                                Capteur newCapteur = new Capteur(subObjet.attribute("id").getValue(),
                                                     subObjet.attribute("type").getValue(),nouvellePiece);
                                 nouvellePiece.addCapteur(newCapteur);
                             }
@@ -77,7 +77,7 @@ public class Accessor {
                             Element subObjet=(Element) itr2.next();
                             if(subObjet.getQualifiedName().equals("capteur"))
                             {
-                                Capteur newCapteur = new Capteur(Integer.parseInt(subObjet.attribute("id").getValue()),
+                                Capteur newCapteur = new Capteur(subObjet.attribute("id").getValue(),
                                                     subObjet.attribute("type").getValue(),nouvelAcces);
                                 nouvelAcces.addCapteur(newCapteur);
                             }

@@ -18,11 +18,11 @@ public class Capteur {
         LUMINOSITE,
         AUTRE;
     }
-    Integer id;
+    String id;
     Piece lieu;
     Type monType;
 
-    public Capteur(int theid, String type,Conteneur p)
+    public Capteur(String theid, String type,Conteneur p)
     {
         this.id=theid;
         System.out.println(type);
@@ -47,7 +47,7 @@ public class Capteur {
             monType=Type.AUTRE;
         }
     }
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
