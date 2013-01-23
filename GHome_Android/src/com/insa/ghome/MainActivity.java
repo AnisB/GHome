@@ -1,5 +1,6 @@
 package com.insa.ghome;
 
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -14,7 +15,7 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 
 	protected TextView coucou = null;
-	protected EditText log = null;
+//	protected EditText log = null;
 	protected EditText ip = null;
 	protected EditText login = null;
 	protected EditText password = null;
@@ -28,7 +29,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         
         coucou = (TextView)findViewById(R.id.textView1);
-        log = (EditText)findViewById(R.id.log);
         ip = (EditText)findViewById(R.id.editTextIP);
         login = (EditText)findViewById(R.id.editTextLogin);
         password = (EditText)findViewById(R.id.editTextPW);
@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				String serverAddress = ip.getText().toString();
-				log.append(serverAddress);
+				coucou.setText(serverAddress);
 				
 	            Thread emission = new Thread(new EmissionThread(serverAddress, outQueue, inQueue));
 				

@@ -57,32 +57,22 @@
         android:inputType="text"
         android:text="10.0.0.2" />
 
-    <TextView
-        android:id="@+id/textView1"
+    <Button
+        android:id="@+id/buttonConnect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextIP"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="22dp"
-        android:text="@string/hello_world" />
-
-    <Button
-        android:id="@+id/buttonConnect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView1"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_toRightOf="@+id/log"
         android:text="@string/buttonConnection" />
 
-    <EditText
-        android:id="@+id/log"
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="21dp"
-        android:ems="10"
-        android:inputType="textMultiLine" />
+        android:layout_below="@+id/buttonConnect"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:text="@string/hello_world" />
 
 </RelativeLayout>
