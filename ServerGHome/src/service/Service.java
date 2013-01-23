@@ -5,6 +5,7 @@
 package service;
 
 import dao.ClickDao;
+import dao.ClientDao;
 import dao.DataDao;
 import java.util.Date;
 import modele.Click;
@@ -26,6 +27,18 @@ public class Service {
                 public void addClick( Click aClick) throws Exception  {
             ClickDao hisData = new ClickDao();
             hisData.create(aClick);
+    }
+            public void addClient( String id, String  mdp) throws Exception  {
+            ClientDao hisClient = new ClientDao();
+            hisClient.create(id,mdp);
+    }      
+            public boolean testClient( String id, String  mdp) throws Exception  {
+            ClientDao hisClient = new ClientDao();
+            JpaUtil.openEntityManager();
+            boolean value= hisClient.testIfRegistred(id,mdp);
+                    JpaUtil.closeEntityManager();
+                    return value;
+
     }
         
         

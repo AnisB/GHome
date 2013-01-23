@@ -57,6 +57,11 @@ import service.Service;
         } catch (DocumentException ex) {
             System.out.println("Problème d'accès au fichier map");
         }
+        try {
+            serviceManager.addClient("id","1234");
+        } catch (Exception ex) {
+            Logger.getLogger(ServerGHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
                 ServerSocket socketserver = null  ;
 		BufferedReader in;
 		PrintWriter out;

@@ -9,6 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import service.Service;
 
 /**
  *
@@ -41,8 +42,15 @@ public class ComClient extends Thread{
             System.out.println("Attente de l'authentification ");
             in = new BufferedReader (new InputStreamReader (myClient.getInputStream()));
             String contenu = in.readLine(); 
-            // Traitement à mettre en place pour voir si le client à blabla...
-            if(false)
+            Service service = new Service();
+            System.out.println(contenu.split(" ")[1]+" "+contenu.split(" ")[2]);
+            boolean isOk=false;
+            try {
+                isOk=service.testClient(contenu.split(" ")[1],contenu.split(" ")[2]);
+            } catch (Exception ex) {
+                Logger.getLogger(ComClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(!isOk)
             {
                 out.println("C0");
                 out.flush(); 
