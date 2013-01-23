@@ -94,22 +94,15 @@ public class Api extends Thread{
         for(Capteur capteur : listeCapteurs) {
             if(trame.contains(""+capteur.getId())){
                 if(capteur.getMonType()==Capteur.Type.INTERRUPTEUR){
-                    //fonction CapteurTrame(trame);
+                    AnalyseInterrupteur(trame);
                 }
                 return true;
-            }
-            else if(isTrameLearn(trame)){
-                addNewCapteur(trame);
             }
          }
          return false;
     }
     
-    private boolean isTrameLearn(String trame){
-        return true;
-    }
-    
-    private void addNewCapteur(String trame){
+    private void AnalyseInterrupteur(String trame){
         
     }
 }
