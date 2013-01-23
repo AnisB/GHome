@@ -49,21 +49,27 @@ public class Api extends Thread{
             while (true) 
             {
                 //mise à jour de la liste des capteurs
-                listeCapteurs.clear();
-                for(Piece piece : lieu.getListPieces()){
-                    listeCapteurs.addAll(piece.getMesCapteurs());
-                }
+                //listeCapteurs.clear();
+                //for(Piece piece : lieu.getListPieces()){
+                //    listeCapteurs.addAll(piece.getMesCapteurs());
+                //}
                 
                 //ecoute de la nouvelle trame entrante
+
                 char[] testChar = new char[28];
                 int message_distant = in.read(testChar);
+                
+                
                 String test = new String(testChar);
+               
+                System.out.println(test);
+               
                 test = CorrigerTrame(test);
                 
                 //analyse de cette trame
-                AnalyseTrame(test);
+                //AnalyseTrame(test);
                 
-                System.out.println(test);
+                
 
             }
 
@@ -92,17 +98,25 @@ public class Api extends Thread{
     
     public boolean AnalyseTrame(String trame){
         for(Capteur capteur : listeCapteurs) {
-            if(trame.contains(""+capteur.getId())){
+            if(trame.contains(capteur.getId())){
                 if(capteur.getMonType()==Capteur.Type.INTERRUPTEUR){
-                    AnalyseInterrupteur(trame);
+                    AnalyseInterrupteur(capteur.getId(), trame);
                 }
+                else if(capteur.getMonType()==Capteur.Type.TEMPERATURE){
+                    AnalyseTemperature(capteur.getId(), trame);
+                }
+                else return false;
                 return true;
             }
          }
          return false;
     }
     
-    private void AnalyseInterrupteur(String trame){
+    private void AnalyseInterrupteur(String id, String trame){
+        
+    }
+    
+    private void AnalyseTemperature(String id, String trame){
         
     }
 }
