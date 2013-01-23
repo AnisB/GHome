@@ -141,7 +141,7 @@ public class MapLieu extends javax.swing.JPanel {
         {
             for(Capteur cP: c.getMesCapteurs())
             {
-                myWindow.getList1().add(cP.getMonType().toString());
+                myWindow.getList1().add("Type: "+cP.getMonType().toString()+" Id: "+cP.getId());
             }
         }
                
