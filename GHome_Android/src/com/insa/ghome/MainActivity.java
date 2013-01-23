@@ -1,15 +1,8 @@
 package com.insa.ghome;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.Socket;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.util.Enumeration;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -21,9 +14,13 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-	private TextView coucou = null;
-	private EditText log = null;
-	private EditText ip = null;
+	protected TextView coucou = null;
+//	protected EditText log = null;
+	protected EditText ip = null;
+	protected EditText login = null;
+	protected EditText password = null;
+	protected BlockingQueue<String> inQueue;
+	protected BlockingQueue<String> outQueue;
 
 	
     @Override
@@ -32,22 +29,35 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         
         coucou = (TextView)findViewById(R.id.textView1);
-        log = (EditText)findViewById(R.id.log);
         ip = (EditText)findViewById(R.id.editTextIP);
+        login = (EditText)findViewById(R.id.editTextLogin);
+        password = (EditText)findViewById(R.id.editTextPW);
 
         coucou.setText(R.string.hello_world);
         final Button bConnect = (Button)findViewById(R.id.buttonConnect);
+        
+        inQueue = new LinkedBlockingQueue<String>();
+        outQueue = new LinkedBlockingQueue<String>();
         bConnect.setOnClickListener(new View.OnClickListener() {
         	
 			
 			@Override
 			public void onClick(View arg0) {
 				String serverAddress = ip.getText().toString();
-				log.append(serverAddress);
+				coucou.setText(serverAddress);
 				
-	            Thread emission = new Thread(new EmissionThread(serverAddress));
+	            Thread emission = new Thread(new EmissionThread(serverAddress, outQueue, inQueue));
 				
 	            emission.start();
+	            
+	            String identificationMessage = "C " + login.getText().toString()
+	            		+ " " + password.getText().toString();
+	            try {
+					outQueue.put(identificationMessage);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 //        setContentView(R.layout.activity_main);
