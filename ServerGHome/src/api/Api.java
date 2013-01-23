@@ -113,7 +113,27 @@ public class Api extends Thread{
     }
     
     private void AnalyseInterrupteur(String id, String trame){
-        
+        int buttonNumber = trame.charAt(8);
+        switch(buttonNumber){
+            case (0) :
+                //capteur au repos
+                break;
+            case (1) :
+                //Switch left up
+                break;
+            case (3) : 
+                //Switch left down”
+                break;
+            case (5) :
+                //switch right up
+                break;
+            case (7) :
+                //switch right down
+                break;
+            default :
+                System.out.println("Mauvaise valeur pour la valeur d'un interrupteur");
+                break;
+        }
     }
     
     private void AnalyseTemperature(String id, String trame){
