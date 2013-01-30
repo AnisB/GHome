@@ -51,6 +51,7 @@ public class ComClient extends Thread{
                 Logger.getLogger(ComClient.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(!isOk)
+
             {
                 out.println("C0 UNKNOWN");
                 out.flush(); 

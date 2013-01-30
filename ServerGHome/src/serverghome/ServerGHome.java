@@ -55,15 +55,9 @@ import service.Service;
             
             Window uneMap = new Window(aHomeCrafter.getLieu());
             monLieu=aHomeCrafter.getLieu();
-            
             uneMap.setVisible(true);
         } catch (DocumentException ex) {
             System.out.println("Problème d'accès au fichier map");
-        }
-        try {
-            serviceManager.addClient("id","1234");
-        } catch (Exception ex) {
-            Logger.getLogger(ServerGHome.class.getName()).log(Level.SEVERE, null, ex);
         }
                 ServerSocket socketserver = null  ;
 		BufferedReader in;
@@ -133,7 +127,7 @@ import service.Service;
             return serviceManager.getNbClick();
         }
 
-    public synchronized Lieu getMonLieu() {
+    public Lieu getMonLieu() {
         return monLieu;
     }
         public String getMap() throws FileNotFoundException, IOException

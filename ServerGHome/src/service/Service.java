@@ -28,18 +28,6 @@ public class Service {
             ClickDao hisData = new ClickDao();
             hisData.create(aClick);
     }
-            public void addClient( String id, String  mdp) throws Exception  {
-            ClientDao hisClient = new ClientDao();
-            hisClient.create(id,mdp);
-    }      
-            public boolean testClient( String id, String  mdp) throws Exception  {
-            ClientDao hisClient = new ClientDao();
-            JpaUtil.openEntityManager();
-            boolean value= hisClient.testIfRegistred(id,mdp);
-                    JpaUtil.closeEntityManager();
-                    return value;
-
-    }
         
         
          public Data  findData(Date aDate) throws Exception
@@ -56,6 +44,20 @@ public class Service {
         return nbClick;
     }
     
+                public void addClient( String id, String  mdp) throws Exception  {
+            ClientDao hisClient = new ClientDao();
+            hisClient.create(id,mdp);
+    }      
+            public boolean testClient( String id, String  mdp) throws Exception  {
+            ClientDao hisClient = new ClientDao();
+            JpaUtil.openEntityManager();
+            boolean value= hisClient.testIfRegistred(id,mdp);
+                    JpaUtil.closeEntityManager();
+                    return value;
+
+    }
+        
+        
     public String getData(String conteneur, String idCapteur, String typeData)
     {
         return new String("G1 42");

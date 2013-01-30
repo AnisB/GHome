@@ -5,17 +5,21 @@
 	</piece>
 	
 	<piece id="1" nom="Chambre Marian" posx="70" posy="70" etage="0" largex="50" largey="80">
+
 		<actionneur id="0" type="Luminosite"/>
 		<capteur id="0882726" type="Interrupteur"/>
+
 	</piece>
 	
 
 	<piece id="2" nom="Chambre Fred" posx="70" posy="0" etage="0" largex="70" largey="65">
+
 		<actionneur id="0JZNDJ" type="Luminosite"/>
 		<capteur id="0DJNDJZ" type="Interrupteur"/>
 	</piece>
 	
 	<piece id="4" nom="Salon japonais" posx="0" posy="0" etage="1" largex="65" largey="100">
+
 		<capteur id="0OIUYG" type="Interrupteur"/>
 		<capteur id="0JFVBND" type="Luminosite"/>
 	</piece>
@@ -24,7 +28,6 @@
 	</piece>
 	
 	<piece id="7" nom="Sejour" posx="140" posy="80" etage="2" largex="140" largey="80">
-
 	</piece>
 		
 	<acces id="8" nom="Porte" posx="65" posy="80" etage="0" taillex="5" tailley="20">

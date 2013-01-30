@@ -18,7 +18,6 @@ import serverghome.ServerGHome;
 public class Api extends Thread{
     
     List<Capteur> listeCapteurs = new ArrayList<Capteur>();
-    Lieu lieu;
     
     protected ServerGHome myServer;
     /**
@@ -37,21 +36,23 @@ public class Api extends Thread{
         PrintWriter out;
 
         try {
-            
-            while(lieu==null) lieu=myServer.getMonLieu();
-            System.out.println(lieu.getNomLieu());
             socket = new Socket("134.214.105.28", 5000);
             System.out.println("Demande de connexion");
 
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+            Lieu lieu = null;
+            while(lieu==null){
+                lieu = myServer.getMonLieu();
+            }
             
             while (true) 
             {
                 //mise à jour de la liste des capteurs
-                listeCapteurs.clear();
-                for(Piece piece : lieu.getListPieces()){
-                    listeCapteurs.addAll(piece.getMesCapteurs());
-                }
+                //listeCapteurs.clear();
+                //for(Piece piece : lieu.getListPieces()){
+                //    listeCapteurs.addAll(piece.getMesCapteurs());
+                //}
                 
                 //ecoute de la nouvelle trame entrante
 
@@ -61,10 +62,12 @@ public class Api extends Thread{
                 
                 String test = new String(testChar);
                
+                System.out.println(test);
+               
                 test = CorrigerTrame(test);
                 
                 //analyse de cette trame
-                AnalyseTrame(test);
+                //AnalyseTrame(test);
                 
                 
 
@@ -103,7 +106,6 @@ public class Api extends Thread{
                     AnalyseTemperature(capteur.getId(), trame);
                 }
                 else return false;
-                System.out.println(trame);
                 return true;
             }
          }
@@ -135,7 +137,6 @@ public class Api extends Thread{
     }
     
     private void AnalyseTemperature(String id, String trame){
-        String temperature = new String(trame.substring(13, 14));
-        System.out.println((float)40-(float)40*(float)((float)Integer.parseInt(temperature, 16)/(float)255));
+        
     }
 }
