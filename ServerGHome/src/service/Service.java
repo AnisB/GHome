@@ -55,4 +55,14 @@ public class Service {
         JpaUtil.closeEntityManager();
         return nbClick;
     }
+    
+    public String getData(String conteneur, String idCapteur, String typeData)
+    {
+        return new String("G1 42");
+    }
+    
+        public void sendOrder(String conteneur, String idCapteur, String typeData)
+    {
+       
+    }
 }

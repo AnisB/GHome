@@ -36,23 +36,23 @@ public class ComClient extends Thread{
     {
         BufferedReader in;
         try {
-            System.out.println("Associated thread launched");
-            System.out.println("Un client s'est connecté");
+            //ystem.out.println("Associated thread launched");
+            //System.out.println("Un client s'est connecté");
             out = new PrintWriter(myClient.getOutputStream());   
             System.out.println("Attente de l'authentification ");
             in = new BufferedReader (new InputStreamReader (myClient.getInputStream()));
             String contenu = in.readLine(); 
-            Service service = new Service();
-            System.out.println(contenu.split(" ")[1]+" "+contenu.split(" ")[2]);
+            Service serviceManager = new Service();
+            //System.out.println(contenu.split(" ")[1]+" "+contenu.split(" ")[2]);
             boolean isOk=false;
             try {
-                isOk=service.testClient(contenu.split(" ")[1],contenu.split(" ")[2]);
+                isOk=serviceManager.testClient(contenu.split(" ")[1],contenu.split(" ")[2]);
             } catch (Exception ex) {
                 Logger.getLogger(ComClient.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(!isOk)
             {
-                out.println("C0");
+                out.println("C0 UNKNOWN");
                 out.flush(); 
                 myClient.close();
                 myHost.removeClient(myClient.getInetAddress());
@@ -64,8 +64,6 @@ public class ComClient extends Thread{
             {   
                 in = new BufferedReader (new InputStreamReader (myClient.getInputStream()));
                 String message = in.readLine();            
-                System.out.println("message recu"+message);
-                System.out.println(message.compareTo("D"));
                 switch (message.charAt(0))
                 {
                     // We are in the case of a disconnection
@@ -74,10 +72,30 @@ public class ComClient extends Thread{
                         myClient.close();
                         myHost.removeClient(myClient.getInetAddress());
                         break;
+                        // The client is asking for getting the map
+                    case 'M':
+                        String map=myHost.getMap();
+                        out.println(map);
+                        out.flush();
+                        break;
                     // The terminal asks for the nb of clicks been done 
                     case 'A':
-                        out.println("A"+myHost.getNbClick());
+                        myHost.addAssociation(message);
+                        out.println("A1");
                         out.flush();
+                        break;
+                    case 'G':
+                        String info=serviceManager.getData(message.split(" ")[0],message.split(" ")[1],message.split(" ")[2]);
+                        out.println(info);
+                        out.flush();
+                        break;
+                    case 'K':
+                        String v = myHost.getAssoMsg();
+                        out.println(v);
+                        out.flush();
+                        break;
+                    case 'O':
+                        serviceManager.sendOrder(message.split(" ")[0],message.split(" ")[1],message.split(" ")[2]);
                         break;
                     // THe termianl asks for the room temprature
                     case 'T':

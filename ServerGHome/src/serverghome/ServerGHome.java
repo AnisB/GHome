@@ -6,18 +6,19 @@ package serverghome;
 import Interface.MapLieu;
 import Interface.Window;
 import XMLParser.Crafter;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modele.Click;
+import modele.home.Association;
 import modele.home.Lieu;
 import org.dom4j.DocumentException;
 import service.Service;
@@ -33,6 +34,7 @@ import service.Service;
             Map<InetAddress,ComClient> myClientMap;
             Service serviceManager;
             Lieu monLieu;
+            List <Association> myAssociations= new ArrayList<Association>();
             
         public ServerGHome()
         {
@@ -134,5 +136,38 @@ import service.Service;
     public synchronized Lieu getMonLieu() {
         return monLieu;
     }
-        
+        public String getMap() throws FileNotFoundException, IOException
+        {
+        BufferedReader reader = new BufferedReader( new FileReader ("../map.xml"));
+    String         line = null;
+    StringBuilder  stringBuilder = new StringBuilder();
+    String         ls = System.getProperty("line.separator");
+
+    while( ( line = reader.readLine() ) != null ) {
+        stringBuilder.append( line );
+        stringBuilder.append( ls );
+    }
+
+    return stringBuilder.toString();
+}
+        public void addAssociation(String msg)
+        {
+            List<String> attributes = new ArrayList<String>();
+            for(String s :msg.split(" "))
+            {
+                attributes.add(s);
+            }
+            Association newAsso= new Association(attributes);
+            myAssociations.add(newAsso);
+        }
+        public String getAssoMsg()
+        {
+            String msg="A";
+            msg+=" "+myAssociations.size();
+            for(Association a : myAssociations)
+            {
+                msg+=a.toString();
+            }
+            return msg;
+        }
     }
