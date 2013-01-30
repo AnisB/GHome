@@ -16,11 +16,11 @@ public class MapLieu extends javax.swing.JPanel {
 
     public int selected;
     public Lieu monLieu;
-    Window myWindow;
+    Window2 myWindow;
     /**
      * Creates new form MapLieu
      */
-    public MapLieu(Lieu unLieu,Window w) {
+    public MapLieu(Lieu unLieu,Window2 w) {
         
         initComponents();
         monLieu=unLieu;

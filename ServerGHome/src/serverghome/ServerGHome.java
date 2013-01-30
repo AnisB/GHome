@@ -4,7 +4,7 @@
 */
 package serverghome;
 import Interface.MapLieu;
-import Interface.Window;
+import Interface.Window2;
 import XMLParser.Crafter;
 import java.io.*;
 import java.net.InetAddress;
@@ -54,7 +54,7 @@ import service.Service;
         try {
             Crafter aHomeCrafter = new Crafter("../map.xml");
             
-            Window uneMap = new Window(aHomeCrafter.getLieu());
+            Window2 uneMap = new Window2(aHomeCrafter.getLieu());
             monLieu=aHomeCrafter.getLieu();
             uneMap.setVisible(true);
         } catch (DocumentException ex) {
@@ -168,5 +168,11 @@ import service.Service;
                 msg+=a.toString();
             }
             return msg;
+        }
+        
+        
+        public void getFromAPI(String msg)
+        {
+            //msg.split(msg)[]
         }
     }
