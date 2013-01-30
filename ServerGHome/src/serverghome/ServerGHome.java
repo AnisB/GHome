@@ -51,6 +51,7 @@ import service.Service;
         public  void run() 
         {
         try {
+        try {
             Crafter aHomeCrafter = new Crafter("../map.xml");
             
             Window uneMap = new Window(aHomeCrafter.getLieu());
@@ -59,14 +60,15 @@ import service.Service;
         } catch (DocumentException ex) {
             System.out.println("Problème d'accès au fichier map");
         }
+                serviceManager.addClient("id", "1234");
                 ServerSocket socketserver = null  ;
-		BufferedReader in;
-		PrintWriter out;
-		
-		try {
-		
-			socketserver = new ServerSocket(4500);
-			System.out.println("Le serveur est à l'écoute du port "+socketserver.getLocalPort());
+                BufferedReader in;
+                PrintWriter out;
+                
+                try {
+                
+                        socketserver = new ServerSocket(4500);
+                        System.out.println("Le serveur est à l'écoute du port "+socketserver.getLocalPort());
                         while(serverOn)
                         {
                             System.out.println("remise en attente");
@@ -91,14 +93,17 @@ import service.Service;
 
 
                         }
-		        
-		}catch (IOException e) {
-			
-			e.printStackTrace();
-		}
+                        
+                }catch (IOException e) {
+                        
+                        e.printStackTrace();
+                }
         try {
             socketserver.close();
         } catch (IOException ex) {
+            Logger.getLogger(ServerGHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        } catch (Exception ex) {
             Logger.getLogger(ServerGHome.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
@@ -156,7 +161,7 @@ import service.Service;
         }
         public String getAssoMsg()
         {
-            String msg="A";
+            String msg="K";
             msg+=" "+myAssociations.size();
             for(Association a : myAssociations)
             {

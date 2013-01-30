@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package modele.home;
+package modele;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,8 +16,7 @@ import javax.persistence.*;
 public class Client   implements Serializable {
 
         @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    protected   String id;
+        protected   String id;
     protected        String mdp;
 
     public Client() 

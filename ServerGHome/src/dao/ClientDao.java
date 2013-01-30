@@ -6,7 +6,7 @@ package dao;
 
 import javax.persistence.Query;
 import modele.Click;
-import modele.home.Client;
+import modele.Client;
 import util.JpaUtil;
 
 /**
@@ -28,7 +28,7 @@ public class ClientDao {
     }
        public boolean testIfRegistred(String id, String mdp)
        {   
-            Query query = (Query) JpaUtil.getEntityManager().createQuery("SELECT c from Client c WHERE c.ID=:id");
+            Query query = (Query) JpaUtil.getEntityManager().createQuery("SELECT c from Client c WHERE c.id=:id");
             Client c = (Client)query.setParameter("id", id).getSingleResult();
             if(c!=null)
                 return true;

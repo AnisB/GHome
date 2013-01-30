@@ -43,7 +43,7 @@ public class ComClient extends Thread{
             in = new BufferedReader (new InputStreamReader (myClient.getInputStream()));
             String contenu = in.readLine(); 
             Service serviceManager = new Service();
-            //System.out.println(contenu.split(" ")[1]+" "+contenu.split(" ")[2]);
+            System.out.println(contenu.split(" ")[1]+" "+contenu.split(" ")[2]);
             boolean isOk=false;
             try {
                 isOk=serviceManager.testClient(contenu.split(" ")[1],contenu.split(" ")[2]);
@@ -97,6 +97,8 @@ public class ComClient extends Thread{
                         break;
                     case 'O':
                         serviceManager.sendOrder(message.split(" ")[0],message.split(" ")[1],message.split(" ")[2]);
+                        out.println("O1");
+                        out.flush();
                         break;
                     // THe termianl asks for the room temprature
                     case 'T':
