@@ -15,10 +15,13 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 
 	protected TextView coucou = null;
-	// protected EditText log = null;
 	protected EditText ip = null;
 	protected EditText login = null;
 	protected EditText password = null;
+	
+	protected EditText messageField = null;
+	
+	
 	protected BlockingQueue<String> inQueue;
 	protected BlockingQueue<String> outQueue;
 
@@ -31,6 +34,8 @@ public class MainActivity extends Activity {
 		ip = (EditText) findViewById(R.id.editTextIP);
 		login = (EditText) findViewById(R.id.editTextLogin);
 		password = (EditText) findViewById(R.id.editTextPW);
+		
+		messageField = (EditText) findViewById(R.id.messageField);
 
 		coucou.setText(R.string.hello_world);
 		final Button bConnect = (Button) findViewById(R.id.buttonConnect);
@@ -69,6 +74,18 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
+		
+		final Button bSend = (Button) findViewById(R.id.buttonSend);
+		bSend.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				String message = messageField.getText().toString();
+				
+				
+			}
+		});
+		
 		// setContentView(R.layout.activity_main);
 	}
 
