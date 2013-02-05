@@ -36,7 +36,7 @@ public class ComClient extends Thread{
     {
         BufferedReader in;
         try {
-            //ystem.out.println("Associated thread launched");
+            //System.out.println("Associated thread launched");
             //System.out.println("Un client s'est connecté");
             out = new PrintWriter(myClient.getOutputStream());   
             System.out.println("Attente de l'authentification ");
@@ -76,7 +76,7 @@ public class ComClient extends Thread{
                         // The client is asking for getting the map
                     case 'M':
                         String map=myHost.getMap();
-                        out.println(map);
+                        out.println("M "+map.replace('\n', ' '));
                         out.flush();
                         break;
                     // The terminal asks for the nb of clicks been done 
@@ -99,12 +99,7 @@ public class ComClient extends Thread{
                         serviceManager.sendOrder(message.split(" ")[0],message.split(" ")[1],message.split(" ")[2]);
                         out.println("O1");
                         out.flush();
-                        break;
-                    // THe termianl asks for the room temprature
-                    case 'T':
-                        out.println("T"+myHost.getNbClick());
-                        out.flush();
-                        break;    
+                        break;   
                     default:
                         break;
                 }

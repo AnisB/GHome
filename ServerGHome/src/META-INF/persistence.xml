@@ -4,7 +4,10 @@
     <provider>oracle.toplink.essentials.PersistenceProvider</provider>
     <class>modele.Data</class>
     <class>modele.Click</class>
-    <class>modele.Client</class>
+    <class>modele.admin.Client</class>
+    <class>modele.Temperature</class>
+    <class>modele.Presence</class>
+    <class>modele.Contact</class>
     <properties>
       <property name="toplink.jdbc.user" value="DB"/>
       <property name="toplink.jdbc.password" value="pouet"/>

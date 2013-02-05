@@ -115,18 +115,7 @@ import service.Service;
         System.out.println(myClientMap.size());
 
     }
-        public synchronized void sendClick(int buttonID)
-    {
-        Click aClick = new Click(buttonID);
-        try {
-            serviceManager.addClick(aClick);
-        } catch (Exception ex) {
-            Logger.getLogger(ServerGHome.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("Click recu");
 
-
-    }
         public synchronized int getNbClick()
         {
             return serviceManager.getNbClick();
@@ -173,6 +162,7 @@ import service.Service;
         
         public void getFromAPI(String msg)
         {
-            //msg.split(msg)[]
+            String [] msg2=msg.split(" ");
+            serviceManager.manageData(msg2[0],msg2[1],msg2[2]);
         }
     }

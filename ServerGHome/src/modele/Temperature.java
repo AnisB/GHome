@@ -4,25 +4,56 @@
  */
 package modele;
 
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.*;
+
 /**
  *
  * @author anisbenyoub
  */
-public class Temperature {
-    protected int value;
+@Entity
+public class Temperature   implements Serializable {
 
-    public Temperature(int aValue)
-    {
-        value=aValue;
+        @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected   Integer id;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    protected        Date mHeure;
+
+    protected String capID;
+    protected  Float value;
+    public Temperature() {
+        mHeure= new Date();
+                capID="-1";
+
     }
-    public int getValue() {
+
+
+    public Temperature(String capID, Float value)
+    {
+        this.capID=capID;
+                mHeure= new Date();
+                this.value=value;
+
+    }
+
+
+
+    public void setButtonID(String capID) {
+        this.capID = capID;
+    }
+        public Date getmHeure() {
+        return mHeure;
+    }
+
+    public String getCapID() {
+        return capID;
+    }
+
+    public Float getValue() {
         return value;
     }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
-    
-    
-    
 }
+

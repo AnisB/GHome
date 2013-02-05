@@ -38,21 +38,23 @@ public class Api extends Thread{
         try {
             socket = new Socket("134.214.105.28", 5000);
             System.out.println("Demande de connexion");
+            
 
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             Lieu lieu = null;
             while(lieu==null){
+                System.out.println("Attente du serveur");
                 lieu = myServer.getMonLieu();
             }
             
             while (true) 
             {
                 //mise à jour de la liste des capteurs
-                //listeCapteurs.clear();
-                //for(Piece piece : lieu.getListPieces()){
-                //    listeCapteurs.addAll(piece.getMesCapteurs());
-                //}
+                listeCapteurs.clear();
+                for(Piece piece : lieu.getListPieces()){
+                    listeCapteurs.addAll(piece.getMesCapteurs());
+                }
                 
                 //ecoute de la nouvelle trame entrante
 
@@ -62,12 +64,14 @@ public class Api extends Thread{
                 
                 String test = new String(testChar);
                
-                System.out.println(test);
+                
                
                 test = CorrigerTrame(test);
                 
+                //System.out.println(test);
+                
                 //analyse de cette trame
-                //AnalyseTrame(test);
+                AnalyseTrame(test);
                 
                 
 
@@ -86,19 +90,24 @@ public class Api extends Thread{
     String CorrigerTrame(String trame){
         int index = trame.indexOf("A55A0B");
 
-        if(index!=0){ //remettre la trame dans le bon sens en cas de problème au niveau du proxy
-            String newString=trame.substring(index);
-            newString+=trame.substring(0, index);
-            trame=newString;
+        if(trame.length()>=28 && index <=28){        
+            if(index>0){ //remettre la trame dans le bon sens en cas de problème au niveau du proxy
+                String newString=trame.substring(index);
+                newString+=trame.substring(0, index);
+                trame=newString;
+            }
         }
-        
         return trame;
         
     }
     
     public boolean AnalyseTrame(String trame){
+        
+        String id = trame.substring(16, 24);
+        
         for(Capteur capteur : listeCapteurs) {
-            if(trame.contains(capteur.getId())){
+            if(id.equals(capteur.getId())){
+                System.out.println(capteur.getId());
                 if(capteur.getMonType()==Capteur.Type.INTERRUPTEUR){
                     AnalyseInterrupteur(capteur.getId(), trame);
                 }
@@ -113,22 +122,27 @@ public class Api extends Thread{
     }
     
     private void AnalyseInterrupteur(String id, String trame){
-        int buttonNumber = trame.charAt(8);
+        int buttonNumber = trame.charAt(8)-48; //-48 parceque le code ascii de 0 est 48
         switch(buttonNumber){
             case (0) :
-                //capteur au repos
+                myServer.getFromAPI("C "+id+" 0");
+                System.out.println("capteur au repos");
                 break;
             case (1) :
-                //Switch left up
+                myServer.getFromAPI("C "+id+" 1");
+                System.out.println("Switch left up");
                 break;
             case (3) : 
-                //Switch left down”
+                myServer.getFromAPI("C "+id+" 3");
+                System.out.println("Switch left down");
                 break;
             case (5) :
-                //switch right up
+                myServer.getFromAPI("C "+id+" 5");
+                System.out.println("switch right up");
                 break;
             case (7) :
-                //switch right down
+                myServer.getFromAPI("C "+id+" 7");
+                System.out.println("switch right down");
                 break;
             default :
                 System.out.println("Mauvaise valeur pour la valeur d'un interrupteur");
@@ -137,6 +151,40 @@ public class Api extends Thread{
     }
     
     private void AnalyseTemperature(String id, String trame){
-        
+        String temperature = new String(trame.substring(12, 13));
+        temperature = ""+((float)40-(float)40*(float)((float)Integer.parseInt(temperature, 16)/(float)255));
+        System.out.println(temperature);
+        myServer.getFromAPI("T "+id+" "+ temperature);
+    }
+
+    private void AnalysePrésence(String id, String trame){
+    //valeur intéressante sur le bit1
+        String presence = trame.substring(12, 14);
+        Integer valeurPresence = Integer.parseInt(presence, 16);
+        if (valeurPresence <= 127){
+            //Pas de présence
+        }
+        else if (valeurPresence > 127 && valeurPresence <= 255){
+            //Presence
+        }
+        else{
+            System.out.println("Mauvaise valeur pour la valeur du capteur de présence");
+            //Mauvaise valeur
+        }
+    }
+
+    private void AnalyseContact(String id, String trame){
+    //valeur intéressante sur le bit1
+        int valueContact = trame.charAt(15)-48;
+        if (valueContact == 8){
+            //Capteur ouvert
+        }
+        else if (valueContact == 9){
+            //Capteur fermé
+        }
+        else{
+            System.out.println("Mauvaise valeur pour la valeur du capteur de contact");
+            //Mauvaise valeur
+        }
     }
 }

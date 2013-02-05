@@ -1,7 +1,7 @@
 <lieu nom="myHome" type="maison" nbEtage="3">
 	<piece id="0" nom="Sejour" posx="0" posy="0" etage="0" largex="65" largey="100">
-		<capteur id="021CBE2" type="Position"/>
-		<capteur id="0893382" type="Temperature"/>
+		<capteur id="0021CBE2" type="Interrupteur"/>
+		<capteur id="00893382" type="Temperature"/>
 	</piece>
 	
 	<piece id="1" nom="Chambre Marian" posx="70" posy="70" etage="0" largex="50" largey="80">

@@ -5,8 +5,7 @@
 package dao;
 
 import javax.persistence.Query;
-import modele.Click;
-import modele.Client;
+import modele.admin.Client;
 import util.JpaUtil;
 
 /**

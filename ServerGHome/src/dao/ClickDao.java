@@ -4,6 +4,7 @@
  */
 package dao;
 
+import java.util.List;
 import javax.persistence.Query;
 import modele.Click;
 import util.JpaUtil;
@@ -30,5 +31,16 @@ public class ClickDao {
         Long result = (Long)query.getSingleResult();
         return result.intValue();
     }
+         
+       public Click getLastClick(String id)
+       {   
+            Query query = (Query) JpaUtil.getEntityManager().createQuery("SELECT c from Click c WHERE c.capID=:id");
+            List<Click> t = query.setParameter("id", id).getResultList();
+            if(!t.isEmpty())
+                return t.get(0);
+            else
+                return null;
+
+       }
 
 }
