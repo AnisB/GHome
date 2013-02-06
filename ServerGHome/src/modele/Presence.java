@@ -22,7 +22,7 @@ public class Presence   implements Serializable {
     protected        Date mHeure;
 
     protected String capID;
-    protected  boolean value;
+    protected  int value;
     public Presence() {
         mHeure= new Date();
                 capID="-1";
@@ -30,7 +30,7 @@ public class Presence   implements Serializable {
     }
 
 
-    public Presence(String capID, boolean value)
+    public Presence(String capID, int value)
     {
         this.capID=capID;
                 mHeure= new Date();
@@ -50,7 +50,7 @@ public class Presence   implements Serializable {
         return capID;
     }
 
-    public boolean isValue() {
+    public int isValue() {
         return value;
     }
 

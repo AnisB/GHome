@@ -4,16 +4,11 @@
  */
 package service;
 
-import dao.ClickDao;
-import dao.ClientDao;
-import dao.DataDao;
-import dao.TempDao;
+import dao.*;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modele.Click;
-import modele.Data;
-import modele.Temperature;
+import modele.*;
 import util.JpaUtil;
 
 /**
@@ -61,9 +56,9 @@ public class Service {
     }
 
     public String getData(String idCapteur, String typeData) {
-        
-        
-        
+
+
+
         if (typeData.contains("T")) {
             TempDao td = new TempDao();
             try {
@@ -91,12 +86,38 @@ public class Service {
             } catch (Exception ex) {
                 return new String("G0 CNOTFOUND");
             }
+        } else if (typeData.contains("O")) {
+                        ContactDao cd = new ContactDao();
+            try {
+                Contact c = cd.getIsInContact(idCapteur);
+                if (c != null) {
+                    return new String("G1 " + c.getValue());
+                } else {
+                    return new String("G0 UNKNOWN");
+                }
+
+            } catch (Exception ex) {
+                return new String("G0 CNOTFOUND");
+            }
+        } else if (typeData.contains("P")) {
+                        PresenceDao cd = new PresenceDao();
+            try {
+                Presence c = cd.getPresence(idCapteur);
+                if (c != null) {
+                    return new String("G1 " + c.isValue());
+                } else {
+                    return new String("G0 UNKNOWN");
+                }
+
+            } catch (Exception ex) {
+                return new String("G0 CNOTFOUND");
+            }
         }
         return new String("G0 NOTFOUND");
 
     }
 
-    public void sendOrder(String conteneur, String idCapteur, String typeData,String optionalValue) {
+    public void sendOrder(String conteneur, String idCapteur, String typeData, String optionalValue) {
     }
 
     public void manageData(String typeData, String idCapteur, String value) {

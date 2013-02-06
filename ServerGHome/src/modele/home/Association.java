@@ -112,6 +112,8 @@ public class Association {
     {
         serviceManager.sendOrder(myAttributes.get(2+decalage),myAttributes.get(3+decalage),myAttributes.get(4+decalage),myAttributes.get(5+decalage));
     }
+    
+    
     @Override
     public String toString()
     {
