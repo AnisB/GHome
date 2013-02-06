@@ -60,7 +60,10 @@ public class Service {
 
     }
 
-    public String getData(String conteneur, String idCapteur, String typeData) {
+    public String getData(String idCapteur, String typeData) {
+        
+        
+        
         if (typeData.contains("T")) {
             TempDao td = new TempDao();
             try {

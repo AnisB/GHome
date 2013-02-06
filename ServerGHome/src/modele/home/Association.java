@@ -38,10 +38,14 @@ public class Association {
     
     public boolean test()
     {
-        int decalage =0;
+         decalage =0;
         for(int i=0; i!=nbConditions;i++ )
         {
-        String s = serviceManager.getData(myAttributes.get(2+decalage),myAttributes.get(2+decalage),myAttributes.get(3+decalage));
+        String s = serviceManager.getData(myAttributes.get(2+decalage),myAttributes.get(3+decalage));
+        if(s.contains("G0"))
+        {
+            return false;
+        }
         if(myAttributes.get(3+decalage).equals("Exact"))
         {
             if( s.equals("G1 "+myAttributes.get(4)))
@@ -57,7 +61,8 @@ public class Association {
         }
         else if(myAttributes.get(3).equals("Range"))
         {
-            Integer is=Integer.valueOf(s);
+            String v =s.split(" ")[1];
+            Integer is=Integer.valueOf(v);
             Integer lb=Integer.valueOf(myAttributes.get(5+decalage));
             Integer ub=Integer.valueOf(myAttributes.get(6+decalage));
             if ((is>lb)&&(is<ub))
@@ -72,7 +77,8 @@ public class Association {
         }
         else if(myAttributes.get(3).equals("Inf"))
         {
-            Integer is=Integer.valueOf(s);
+            String v =s.split(" ")[1];
+            Integer is=Integer.valueOf(v);
             Integer lb=Integer.valueOf(myAttributes.get(5));
             if ((is>lb))
             {
@@ -86,7 +92,8 @@ public class Association {
         }
         else if(myAttributes.get(3).equals("Sup"))
         {
-            Integer is=Integer.valueOf(s);
+            String v =s.split(" ")[1];
+            Integer is=Integer.valueOf(v);
             Integer ub=Integer.valueOf(myAttributes.get(5));
             if ((is<ub))
             {
@@ -105,7 +112,7 @@ public class Association {
     {
         serviceManager.sendOrder(myAttributes.get(2+decalage),myAttributes.get(3+decalage),myAttributes.get(4+decalage),myAttributes.get(5+decalage));
     }
-    
+    @Override
     public String toString()
     {
         String value="";

@@ -86,7 +86,15 @@ public class ComClient extends Thread{
                         out.flush();
                         break;
                     case 'G':
-                        String info=serviceManager.getData(message.split(" ")[0],message.split(" ")[1],message.split(" ")[2]);
+                        String info="";
+                        if(myHost.capteurExists(message.split(" ")[1]))
+                        {
+                        info=serviceManager.getData(message.split(" ")[1],message.split(" ")[2]);
+                        }
+                        else
+                        {
+                            
+                        }
                         out.println(info);
                         out.flush();
                         break;

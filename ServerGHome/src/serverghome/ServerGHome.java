@@ -18,8 +18,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modele.Click;
-import modele.home.Association;
-import modele.home.Lieu;
+import modele.home.*;
 import org.dom4j.DocumentException;
 import service.Service;
     /**
@@ -197,5 +196,27 @@ import service.Service;
             }
         
             return false;
+        }
+        
+        
+        public boolean capteurExists(String ID)
+        {
+            List<Capteur> listeCapteurs = new ArrayList<Capteur>();
+            for(Piece piece : monLieu.getListPieces())
+            {
+                    listeCapteurs.addAll(piece.getMesCapteurs());
+                }
+            for(Acces acc : monLieu.getListAcces()){
+                    listeCapteurs.addAll(acc.getMesCapteurs());
+                }
+            
+            for(Capteur c :listeCapteurs)
+            {
+                if(c.getId().equals(ID))
+                {
+                    return true;
+                }
+            }
+            return false;    
         }
     }
