@@ -172,4 +172,30 @@ import service.Service;
                 }
             }
         }
+        
+        public synchronized boolean deleteAssociation(String assoc)
+        {
+            String [] msg2=assoc.split(" ");
+            String value="";
+        
+            for(int i=2;i!=msg2.length-1;i++)
+            {
+                value+=msg2[i]+" ";
+            }
+            value+=msg2[msg2.length-1];
+            
+            System.out.println("It's value is "+value);
+            for(Association a: mesAssociations)
+            {
+                System.out.println("A value "+ a.toString());
+                if(a.toString().equals(value))
+                {
+                    System.out.println("Right!");
+                    mesAssociations.remove(a);
+                    return true;
+                }
+            }
+        
+            return false;
+        }
     }

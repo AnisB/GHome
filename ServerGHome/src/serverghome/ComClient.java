@@ -100,6 +100,18 @@ public class ComClient extends Thread{
                         out.println("O1");
                         out.flush();
                         break;   
+                    case 'B':
+                        v="";
+                        if(myHost.deleteAssociation(message))
+                        {
+                            v="B1";
+                        }
+                        else
+                        {
+                            v="B0 NOTFOUND";
+                        }
+                        out.println(v);
+                        out.flush();
                     default:
                         break;
                 }

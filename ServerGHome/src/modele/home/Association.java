@@ -110,10 +110,11 @@ public class Association {
     {
         String value="";
         
-        for(int i=1;i!=myAttributes.size();i++)
+        for(int i=1;i!=myAttributes.size()-1;i++)
         {
-            value+=" "+myAttributes.get(i);
+            value+=myAttributes.get(i)+" ";
         }
+        value+=myAttributes.get(myAttributes.size()-1);
         return value;
     }
 }
