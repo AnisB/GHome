@@ -14,8 +14,8 @@ public class Capteur {
 
         INTERRUPTEUR,
         TEMPERATURE,
-        POSITION,
-        LUMINOSITE,
+        CONTACT,
+        PRESENCE,
         AUTRE;
     }
     String id;
@@ -34,13 +34,13 @@ public class Capteur {
         {
              monType=Type.TEMPERATURE;
         }
-        else if(type.equals("position"))
+        else if(type.equals("presence"))
         {
-             monType=Type.POSITION;
+             monType=Type.PRESENCE;
         }
-        else if(type.equals("luminosite"))
+        else if(type.equals("contact"))
         {
-             monType=Type.LUMINOSITE;
+             monType=Type.CONTACT;
         }
         else
         {
