@@ -33,7 +33,6 @@ public class Api extends Thread{
 
         Socket socket;
         BufferedReader in;
-        PrintWriter out;
 
         try {
             socket = new Socket("134.214.105.28", 5000);
@@ -44,9 +43,10 @@ public class Api extends Thread{
 
             Lieu lieu = null;
             while(lieu==null){
-                System.out.println("Attente du serveur");
+                System.out.print("");
                 lieu = myServer.getMonLieu();
             }
+            System.out.println("");
             
             while (true) 
             {
@@ -59,12 +59,12 @@ public class Api extends Thread{
                 //ecoute de la nouvelle trame entrante
 
                 char[] testChar = new char[28];
-                int message_distant = in.read(testChar);
                 
                 
-                String test = new String(testChar);
-               
-                
+                String test;
+                in.read(testChar);
+                test =  new String(testChar);
+                //int message_distant = in.read(testChar);
                
                 test = CorrigerTrame(test);
                 
@@ -151,9 +151,9 @@ public class Api extends Thread{
     }
     
     private void AnalyseTemperature(String id, String trame){
-        String temperature = new String(trame.substring(12, 13));
+        String temperature = new String(trame.substring(12, 14));
         temperature = ""+((float)40-(float)40*(float)((float)Integer.parseInt(temperature, 16)/(float)255));
-        System.out.println(temperature);
+        System.out.println("Temperature calculée : "+temperature);
         myServer.getFromAPI("T "+id+" "+ temperature);
     }
 

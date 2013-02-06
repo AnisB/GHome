@@ -18,6 +18,7 @@ public class Association {
     List<String> myTest;
     Service serviceManager = new Service();
     Integer decalage=0;
+    Integer nbConditions;
 
     
     public Association()
@@ -31,42 +32,78 @@ public class Association {
         {
             myAttributes.add(s);
         }
+        nbConditions=Integer.valueOf(myAttributes.get(1));
+        
     }
     
     public boolean test()
     {
-        String s = serviceManager.getData(myAttributes.get(1),myAttributes.get(2),myAttributes.get(3));
-        if(myAttributes.get(3).equals("Exact"))
+        int decalage =0;
+        for(int i=0; i!=nbConditions;i++ )
         {
-            return s.equals(myAttributes.get(4));
+        String s = serviceManager.getData(myAttributes.get(2+decalage),myAttributes.get(2+decalage),myAttributes.get(3+decalage));
+        if(myAttributes.get(3+decalage).equals("Exact"))
+        {
+            if( s.equals("G1 "+myAttributes.get(4)))
+            {
+                decalage=+4;
+                continue;
+            }
+            else
+            {
+                return false;
+            }
 
         }
         else if(myAttributes.get(3).equals("Range"))
         {
-            decalage=1;
-            Integer i=Integer.valueOf(s);
-            Integer lb=Integer.valueOf(myAttributes.get(5));
-            Integer ub=Integer.valueOf(myAttributes.get(6));
-            return ((i>lb)&&(i<ub));
+            Integer is=Integer.valueOf(s);
+            Integer lb=Integer.valueOf(myAttributes.get(5+decalage));
+            Integer ub=Integer.valueOf(myAttributes.get(6+decalage));
+            if ((is>lb)&&(is<ub))
+            {
+                decalage=+5;
+                continue;
+            }
+            else
+            {
+                return false;
+            }
         }
         else if(myAttributes.get(3).equals("Inf"))
         {
-            Integer i=Integer.valueOf(s);
+            Integer is=Integer.valueOf(s);
             Integer lb=Integer.valueOf(myAttributes.get(5));
-            return ((i>lb));
+            if ((is>lb))
+            {
+                decalage=+4;
+                continue;
+            }
+            else
+            {
+                return false;
+            }
         }
         else if(myAttributes.get(3).equals("Sup"))
         {
-            Integer i=Integer.valueOf(s);
+            Integer is=Integer.valueOf(s);
             Integer ub=Integer.valueOf(myAttributes.get(5));
-            return ((i<ub));
+            if ((is<ub))
+            {
+                decalage+=4;
+            }
+            else
+            {
+                return false;
+            }
         }
-        return false;
+        }
+        return true;
     }
     
     public void execute()
     {
-        serviceManager.sendOrder(myAttributes.get(7+decalage),myAttributes.get(8+decalage),myAttributes.get(9+decalage));
+        serviceManager.sendOrder(myAttributes.get(2+decalage),myAttributes.get(3+decalage),myAttributes.get(4+decalage),myAttributes.get(5+decalage));
     }
     
     public String toString()

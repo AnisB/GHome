@@ -17,16 +17,29 @@ public class Actionneur {
     }
     String id;
     Piece lieu;
-    Capteur.Type monType;
+    Actionneur.Type monType;
     public Actionneur(String theid, String type,Conteneur p)
     {
         this.id=theid;
+        type= type.toLowerCase();
+        if(type.equals("lumiere"))
+        {
+             monType=Type.LUMIERE;
+        }
+        else if(type.equals("chauffage"))
+        {
+             monType=Type.CHAUFFAGE;
+        }
+        else
+        {
+            monType=Type.AUTRE;
+        }
     }
     public String getId() {
         return id;
     }
 
-    public Capteur.Type getMonType() {
+    public Actionneur.Type getMonType() {
         return monType;
     }
     

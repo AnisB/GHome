@@ -4,7 +4,7 @@
 */
 package serverghome;
 import Interface.MapLieu;
-import Interface.Window2;
+import Interface.Window;
 import XMLParser.Crafter;
 import java.io.*;
 import java.net.InetAddress;
@@ -34,7 +34,7 @@ import service.Service;
             Map<InetAddress,ComClient> myClientMap;
             Service serviceManager;
             Lieu monLieu;
-            List <Association> myAssociations= new ArrayList<Association>();
+            List <Association> mesAssociations= new ArrayList<Association>();
             
         public ServerGHome()
         {
@@ -54,7 +54,7 @@ import service.Service;
         try {
             Crafter aHomeCrafter = new Crafter("../map.xml");
             
-            Window2 uneMap = new Window2(aHomeCrafter.getLieu());
+            Window uneMap = new Window(aHomeCrafter.getLieu());
             monLieu=aHomeCrafter.getLieu();
             uneMap.setVisible(true);
         } catch (DocumentException ex) {
@@ -146,13 +146,13 @@ import service.Service;
                 attributes.add(s);
             }
             Association newAsso= new Association(attributes);
-            myAssociations.add(newAsso);
+            mesAssociations.add(newAsso);
         }
         public String getAssoMsg()
         {
             String msg="K";
-            msg+=" "+myAssociations.size();
-            for(Association a : myAssociations)
+            msg+=" "+mesAssociations.size();
+            for(Association a : mesAssociations)
             {
                 msg+=a.toString();
             }
@@ -164,5 +164,9 @@ import service.Service;
         {
             String [] msg2=msg.split(" ");
             serviceManager.manageData(msg2[0],msg2[1],msg2[2]);
+            for(Association a: mesAssociations)
+            {
+                
+            }
         }
     }

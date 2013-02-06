@@ -16,11 +16,11 @@ public class MapLieu extends javax.swing.JPanel {
 
     public int selected;
     public Lieu monLieu;
-    Window2 myWindow;
+    Window myWindow;
     /**
      * Creates new form MapLieu
      */
-    public MapLieu(Lieu unLieu,Window2 w) {
+    public MapLieu(Lieu unLieu,Window w) {
         
         initComponents();
         monLieu=unLieu;
@@ -36,15 +36,28 @@ public class MapLieu extends javax.swing.JPanel {
             Capteur c= new Capteur(ID,type2,conT);
             conT.addCapteur(c);
             myWindow.getList1().removeAll();
-        for(Capteur cP: conT.getMesCapteurs())
-        {
-             myWindow.getList1().add("Type: "+cP.getMonType().toString()+" Id: "+cP.getId());
-        } 
+                for(Capteur cP: conT.getMesCapteurs())
+                {
+                    myWindow.getList1().add("Type: Capteur Sous-Type: "+cP.getMonType().toString()+" Id: "+cP.getId());
+                } 
+                for(Actionneur a: conT.getMesActionneurs())
+                {
+                    myWindow.getList1().add("Type: Actionneur Sous-Type: "+a.getMonType().toString()+" Id: "+a.getId());
+                } 
         }
-        else
+        else if(type1.equals("Actionneur"))
         {
-            Actionneur a= new Actionneur(ID,type2,conT);
-            conT.addActionneur(a);
+            Actionneur ax= new Actionneur(ID,type2,conT);
+            conT.addActionneur(ax);
+            myWindow.getList1().removeAll();
+                for(Capteur cP: conT.getMesCapteurs())
+                {
+                    myWindow.getList1().add("Type: Capteur Sous-Type: "+cP.getMonType().toString()+" Id: "+cP.getId());
+                } 
+                for(Actionneur a: conT.getMesActionneurs())
+                {
+                    myWindow.getList1().add("Type: Actionneur Sous-Type: "+a.getMonType().toString()+" Id: "+a.getId());
+                } 
         }
 
     }
@@ -100,36 +113,35 @@ public class MapLieu extends javax.swing.JPanel {
 
     void deleteCalled(String content)
     {
-        if (selected!=-1)
+        if ((selected!=-1)&& (content!=null))
         {
         String CID=content.split("Id: ")[1];
 
         for(Piece p:monLieu.getListPieces())
         {
-             if(p.deleteCapteur(CID))
+             if(p.deleteObjet(CID))
              {
                 myWindow.getList1().removeAll();
                 for(Capteur cP: p.getMesCapteurs())
                 {
-                    myWindow.getList1().add("Type: "+cP.getMonType().toString()+" Id: "+cP.getId());
+                    myWindow.getList1().add("Type: Capteur Sous-Type: "+cP.getMonType().toString()+" Id: "+cP.getId());
+                } 
+                for(Actionneur a: p.getMesActionneurs())
+                {
+                    myWindow.getList1().add("Type: Actionneur Sous-Type: "+a.getMonType().toString()+" Id: "+a.getId());
                 } 
                  break;
              }
+             
+             
  
         }
-        for(Acces a:monLieu.getListAcces())
+        }
+        else
         {
-             if(a.deleteCapteur(CID))
-             {                 
-                myWindow.getList1().removeAll();
-                for(Capteur cP: a.getMesCapteurs())
-                {
-                    myWindow.getList1().add("Type: "+cP.getMonType().toString()+" Id: "+cP.getId());
-                } 
-                 break;
-             }
+            System.out.println("Delete appelé dans le vide");
         }
-        }
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -189,8 +201,12 @@ public class MapLieu extends javax.swing.JPanel {
             myWindow.setDeleteEnable(true);
             for(Capteur cP: c.getMesCapteurs())
             {
-                myWindow.getList1().add("Type: "+cP.getMonType().toString()+" Id: "+cP.getId());
+                myWindow.getList1().add("Type: Capteur Sous-Type: "+cP.getMonType().toString()+" Id: "+cP.getId());
             }
+            for(Actionneur a: c.getMesActionneurs())
+            {
+                 myWindow.getList1().add("Type: Actionneur Sous-Type: "+a.getMonType().toString()+" Id: "+a.getId());
+            } 
         }
         else
         {

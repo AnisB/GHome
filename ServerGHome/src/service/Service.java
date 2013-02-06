@@ -68,10 +68,11 @@ public class Service {
                 if (T != null) {
                     return new String("G1 " + T.getValue());
                 } else {
-                    return new String("39");
+                    return new String("G0 UNKNOWN");
                 }
             } catch (Exception ex) {
                 System.out.println("Error while looking for temperature");
+                return new String("G0 TNOTFOUND");
             }
         } else if (typeData.contains("C")) {
 
@@ -81,18 +82,18 @@ public class Service {
                 if (c != null) {
                     return new String("G1 " + c.getValue());
                 } else {
-                    return new String("39");
+                    return new String("G0 UNKNOWN");
                 }
 
             } catch (Exception ex) {
-                System.out.println("Error while looking for clicks");
+                return new String("G0 CNOTFOUND");
             }
         }
-        return new String("G1 42");
+        return new String("G0 NOTFOUND");
 
     }
 
-    public void sendOrder(String conteneur, String idCapteur, String typeData) {
+    public void sendOrder(String conteneur, String idCapteur, String typeData,String optionalValue) {
     }
 
     public void manageData(String typeData, String idCapteur, String value) {

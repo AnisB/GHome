@@ -32,14 +32,26 @@ public class ClickDao {
         return result.intValue();
     }
          
-       public Click getLastClick(String id)
+       public Click getLastClick(String Theid)
        {   
-            Query query = (Query) JpaUtil.getEntityManager().createQuery("SELECT c from Click c WHERE c.capID=:id");
-            List<Click> t = query.setParameter("id", id).getResultList();
+           try
+            {
+       JpaUtil.openEntityManager();
+        JpaUtil.getEntityManagerTransaction().begin();
+                System.out.println("l'id est:"+ Theid);
+            Query query = (Query) JpaUtil.getEntityManager().createQuery("SELECT c from Click c WHERE c.buttonID=:id ORDER BY c.mHeure DESC");
+            List<Click> t = query.setParameter("id", Theid).getResultList();
             if(!t.isEmpty())
+            {
+                        JpaUtil.closeEntityManager();
                 return t.get(0);
-            else
-                return null;
+            }
+            }
+           catch(Exception ex)
+           {
+              ex.printStackTrace();
+           }
+                return new Click(Theid,-1); 
 
        }
 

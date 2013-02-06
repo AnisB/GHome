@@ -96,7 +96,7 @@ public class ComClient extends Thread{
                         out.flush();
                         break;
                     case 'O':
-                        serviceManager.sendOrder(message.split(" ")[0],message.split(" ")[1],message.split(" ")[2]);
+                        serviceManager.sendOrder(message.split(" ")[0],message.split(" ")[1],message.split(" ")[2],message.split(" ")[3]);
                         out.println("O1");
                         out.flush();
                         break;   

@@ -25,19 +25,20 @@ public class Capteur {
     public Capteur(String theid, String type,Conteneur p)
     {
         this.id=theid;
-        if(type.equals("Interrupteur"))
+        type=type.toLowerCase();
+        if(type.equals("interrupteur"))
         {
              monType=Type.INTERRUPTEUR;
         }
-        else if(type.equals("Temperature"))
+        else if(type.equals("temperature"))
         {
              monType=Type.TEMPERATURE;
         }
-        else if(type.equals("Position"))
+        else if(type.equals("position"))
         {
              monType=Type.POSITION;
         }
-        else if(type.equals("Luminosite"))
+        else if(type.equals("luminosite"))
         {
              monType=Type.LUMINOSITE;
         }

@@ -19,24 +19,25 @@ import modele.home.Lieu;
  *
  * @author anisbenyoub
  */
-public class Window2 extends javax.swing.JFrame {
+public class Window extends javax.swing.JFrame {
+
     MapLieu map;
     private final JButton mapSave;
 
-    public Window2()
-    {
-                mapSave=new javax.swing.JButton();
-                        mapSave.setText("Map");
+    public Window() {
+        mapSave = new javax.swing.JButton();
+        mapSave.setText("Map");
 
     }
-    public Window2(Lieu a) {
+
+    public Window(Lieu a) {
         initComponents();
-        map = new MapLieu(a,this);
-        map.setBounds(0, 0, 400*a.nombreEtage, 400);
+        map = new MapLieu(a, this);
+        map.setBounds(0, 0, 400 * a.nombreEtage, 400);
         map.setVisible(true);
         this.add(map);
-        this.setSize( 400*a.nombreEtage, 800);
-        mapSave=new javax.swing.JButton();
+        this.setSize(400 * a.nombreEtage, 800);
+        mapSave = new javax.swing.JButton();
         mapSave.setLocation(600, 600);
 
         this.add(mapSave);
@@ -47,23 +48,19 @@ public class Window2 extends javax.swing.JFrame {
         type1.addItem("Capteur");
         type1.addItem("Actionneur");
 
+    }
 
+    void setDeleteEnable(boolean a) {
+        deleteButton.setEnabled(a);
     }
-void setDeleteEnable(boolean a)
-{
-    deleteButton.setEnabled(a);
-}
-void testToAdd()
-{
-    if((map.selected!=-1) && (type2.isEnabled())&& (type1.isEnabled()) && !idField.getText().isEmpty())
-    {
-        addButton.setEnabled(true);
+
+    void testToAdd() {
+        if ((map.selected != -1) && (type2.isEnabled()) && (type1.isEnabled()) && !idField.getText().isEmpty()) {
+            addButton.setEnabled(true);
+        } else {
+            addButton.setEnabled(false);
+        }
     }
-    else
-    {
-        addButton.setEnabled(false);
-    }
-}
 
     public List getList1() {
         return list1;
@@ -94,6 +91,8 @@ void testToAdd()
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        list1.setLocation(new java.awt.Point(700, 700));
 
         jLabel1.setText("Capteurs et Actionneurs");
 
@@ -131,11 +130,26 @@ void testToAdd()
         jLabel3.setText("Type d'objet");
 
         type2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        type2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                type2ActionPerformed(evt);
+            }
+        });
 
         type1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        type1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                type1ItemStateChanged(evt);
+            }
+        });
         type1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 type1ActionPerformed(evt);
+            }
+        });
+        type1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                type1KeyPressed(evt);
             }
         });
 
@@ -166,67 +180,70 @@ void testToAdd()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
                         .add(jLabel1)
-                        .addContainerGap(269, Short.MAX_VALUE))
+                        .addContainerGap())
                     .add(layout.createSequentialGroup()
+                        .add(list1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 417, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(layout.createSequentialGroup()
-                                .add(140, 140, 140)
-                                .add(deleteButton))
-                            .add(list1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 247, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                            .add(layout.createSequentialGroup()
-                                .add(6, 6, 6)
+                                .add(26, 26, 26)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                     .add(layout.createSequentialGroup()
-                                        .add(jLabel3)
-                                        .add(65, 65, 65))
-                                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                        .add(idField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 142, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                        .add(jLabel2))))
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                            .add(idField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 142, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                            .add(type1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 142, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                        .addContainerGap(175, Short.MAX_VALUE))
+                                    .add(layout.createSequentialGroup()
+                                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                            .add(type2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 142, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                            .add(addButton))
+                                        .add(0, 0, Short.MAX_VALUE))))
+                            .add(layout.createSequentialGroup()
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                                        .add(type1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 142, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                        .add(layout.createSequentialGroup()
-                                            .add(6, 6, 6)
-                                            .add(jLabel4))
-                                        .add(type2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 142, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                                        .add(addButton)
-                                        .add(58, 58, 58))))))))
+                                    .add(jLabel4)
+                                    .add(deleteButton)
+                                    .add(jLabel3)
+                                    .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                .add(0, 0, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(32, Short.MAX_VALUE)
                 .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 16, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
-                        .add(jLabel2)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(idField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(21, 21, 21)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(layout.createSequentialGroup()
+                                .add(jLabel2)
+                                .add(0, 0, Short.MAX_VALUE))
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                                .add(0, 16, Short.MAX_VALUE)
+                                .add(idField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jLabel3)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(4, 4, 4)
                         .add(type1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jLabel4)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(type2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(10, 10, 10)
-                        .add(addButton))
-                    .add(list1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 199, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(1, 1, 1)
-                .add(deleteButton))
+                        .add(18, 18, 18)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(deleteButton)
+                            .add(addButton)))
+                    .add(layout.createSequentialGroup()
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(list1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 210, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        // TODO add your handling code here:
+        map.deleteCalled(list1.getSelectedItem());
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void idFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idFieldActionPerformed
@@ -238,16 +255,64 @@ void testToAdd()
     }//GEN-LAST:event_idFieldKeyPressed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        // TODO add your handling code here:
+       map.addComposant(idField.getText(), type1.getSelectedItem().toString(), type2.getSelectedItem().toString());
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void type1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_type1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_type1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void type2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_type2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_type2ActionPerformed
+
+    private void type1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_type1KeyPressed
+        type2.removeAllItems();
+        if (type1.getSelectedItem() != null) {
+            if (type1.getSelectedItem().equals("Capteur")) {
+                for (Capteur.Type t : Capteur.Type.values()) {
+                    type2.addItem(t.toString());
+                }
+            } else if (type1.getSelectedItem().equals("Actionneur")) {
+                for (Actionneur.Type t : Actionneur.Type.values()) {
+                    type2.addItem(t.toString());
+                }
+            }
+            addButton.setEnabled(true);
+        } 
+        else
+        {
+            addButton.setEnabled(false);
+            type2.setEnabled(false);
+        }
+    }//GEN-LAST:event_type1KeyPressed
+
+    private void type1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_type1ItemStateChanged
+        type2.removeAllItems();
+
+        if (type1.getSelectedItem() != null) {
+            type2.setEnabled(true);
+            if (type1.getSelectedItem().equals("Capteur")) {
+                for (Capteur.Type t : Capteur.Type.values()) {
+                    type2.addItem(t.toString());
+                }
+            } else if (type1.getSelectedItem().equals("Actionneur")) {
+                for (Actionneur.Type t : Actionneur.Type.values()) {
+                    type2.addItem(t.toString());
+                }
+            }
+            
+            addButton.setEnabled(true);
+        }
+        else
+        {
+            addButton.setEnabled(false);
+            type2.setEnabled(false);
+        }
+    }//GEN-LAST:event_type1ItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -270,13 +335,13 @@ void testToAdd()
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Window2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Window.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Window2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Window.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Window2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Window.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Window2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Window.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -286,7 +351,7 @@ void testToAdd()
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new Window2().setVisible(true);
+                new Window().setVisible(true);
             }
         });
     }
