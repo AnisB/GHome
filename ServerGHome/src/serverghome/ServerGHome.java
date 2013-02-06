@@ -166,7 +166,10 @@ import service.Service;
             serviceManager.manageData(msg2[0],msg2[1],msg2[2]);
             for(Association a: mesAssociations)
             {
-                
+                if(a.test())
+                {
+                    a.execute();
+                }
             }
         }
     }
