@@ -33,7 +33,7 @@ public class Conteneur {
     public void print() {
         System.out.print("Contenueur : nom " + nom);
         for (Capteur c : mesCapteurs) {
-            c.print();
+            
         }
 
         for (Actionneur a : mesActionneurs) {

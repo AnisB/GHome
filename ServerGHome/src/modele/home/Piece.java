@@ -25,6 +25,21 @@ public class Piece extends Conteneur{
         this.largeurY=lY;
                 
     }
+    public String toXml()
+    {
+        String toReturn="<piece id=\""+id+"\" nom=\""+nom+"\" posx=\""+x+"\" posy=\""+y+"\" etage=\""+etage+"\" largex=\""+largeurX+"\" largey=\""+largeurY+"\">\n";
+	for(Capteur c : mesCapteurs)
+        {
+            toReturn+=c.toXml();
+        }
+	for(Actionneur a : mesActionneurs)
+        {
+            toReturn+=a.toXml();
+        }
+	toReturn+="</piece>\n";
+        return toReturn;
+        
+    }
 
 
 

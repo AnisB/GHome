@@ -47,4 +47,8 @@ public class Actionneur {
     {
         System.out.println("Actionneur");
     }
+        public String toXml()
+    {
+        return "<actionneur id=\""+id+"\" type=\""+monType.toString().toLowerCase()+"\"/>\n";
+    }
 }

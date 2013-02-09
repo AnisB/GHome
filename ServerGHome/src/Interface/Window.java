@@ -10,6 +10,11 @@ package Interface;
  */
 import java.awt.Button;
 import java.awt.List;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import modele.home.Actionneur;
 import modele.home.Capteur;
@@ -110,8 +115,14 @@ public class Window extends javax.swing.JFrame {
             }
         });
         idField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                idFieldKeyTyped(evt);
+            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 idFieldKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                idFieldKeyReleased(evt);
             }
         });
 
@@ -255,14 +266,25 @@ public class Window extends javax.swing.JFrame {
     }//GEN-LAST:event_idFieldKeyPressed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-       map.addComposant(idField.getText(), type1.getSelectedItem().toString(), type2.getSelectedItem().toString());
+        map.addComposant(idField.getText(), type1.getSelectedItem().toString(), type2.getSelectedItem().toString());
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void type1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_type1ActionPerformed
     }//GEN-LAST:event_type1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+        String newMap = map.monLieu.toXML();
+        System.out.println(newMap);
+        FileWriter fichier;
+        try {
+            fichier = new FileWriter(new File("../map.xml"), true);
+            fichier.
+            fichier.append(newMap);
+            fichier.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void type2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_type2ActionPerformed
@@ -282,9 +304,7 @@ public class Window extends javax.swing.JFrame {
                 }
             }
             addButton.setEnabled(true);
-        } 
-        else
-        {
+        } else {
             addButton.setEnabled(false);
             type2.setEnabled(false);
         }
@@ -304,15 +324,21 @@ public class Window extends javax.swing.JFrame {
                     type2.addItem(t.toString());
                 }
             }
-            
+
             addButton.setEnabled(true);
-        }
-        else
-        {
+        } else {
             addButton.setEnabled(false);
             type2.setEnabled(false);
         }
     }//GEN-LAST:event_type1ItemStateChanged
+
+    private void idFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idFieldKeyReleased
+        testToAdd();
+    }//GEN-LAST:event_idFieldKeyReleased
+
+    private void idFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idFieldKeyTyped
+        testToAdd();
+    }//GEN-LAST:event_idFieldKeyTyped
 
     /**
      * @param args the command line arguments

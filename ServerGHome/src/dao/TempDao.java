@@ -14,34 +14,22 @@ import util.JpaUtil;
  * @author anisbenyoub
  */
 public class TempDao {
-     public TempDao(){
-        
-        }
-         public void create(Temperature temp) throws Exception  {
 
-        JpaUtil.openEntityManager();
-        JpaUtil.getEntityManagerTransaction().begin();
-        JpaUtil.getEntityManager().persist(temp);
-        JpaUtil.getEntityManagerTransaction().commit();
-        JpaUtil.closeEntityManager();
+    public TempDao() {
     }
-       public Temperature getLastTemp(String id)
-       {   
-           try{
-            JpaUtil.openEntityManager();
-            JpaUtil.getEntityManagerTransaction().begin();
+
+    public void create(Temperature temp) throws Exception {
+        JpaUtil.getEntityManager().persist(temp);
+    }
+
+    public Temperature getLastTemp(String id) {
+        try {
             Query query = (Query) JpaUtil.getEntityManager().createQuery("SELECT c from Temperature c WHERE c.capID=:id :ASC");
-            List<Temperature> t = (List<Temperature>)query.setParameter("id", id).getResultList();
-                    JpaUtil.closeEntityManager();
+            List<Temperature> t = (List<Temperature>) query.setParameter("id", id).getResultList();
             return t.get(0);
-           }
-           catch(Exception ex){
-           }
-           
-                JpaUtil.closeEntityManager();
-                return new Temperature(id, new Float(99.0));
+        } catch (Exception ex) {
+        }
+        return new Temperature(id, new Float(99.0));
 
-       }
-    
-
+    }
 }

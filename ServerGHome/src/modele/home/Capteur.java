@@ -54,4 +54,9 @@ public class Capteur {
     public Type getMonType() {
         return monType;
     }
+    
+    public String toXml()
+    {
+        return "<capteur id=\""+id+"\" type=\""+monType.toString().toLowerCase()+"\"/>\n";
+    }
 }

@@ -13,36 +13,33 @@ import javax.persistence.*;
  * @author anisbenyoub
  */
 @Entity
-public class Presence   implements Serializable {
+public class Presence implements Serializable {
 
-        @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    protected   Integer id;
+    protected Integer id;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    protected        Date mHeure;
-
+    protected Date mHeure;
     protected String capID;
-    protected  int value;
+    protected int presenceValue;
+
     public Presence() {
-        mHeure= new Date();
-                capID="-1";
+        mHeure = new Date();
+        capID = "-1";
 
     }
 
-
-    public Presence(String capID, int value)
-    {
-        this.capID=capID;
-                mHeure= new Date();
+    public Presence(String capID, int value) {
+        this.capID = capID;
+        mHeure = new Date();
 
     }
-
-
 
     public void setButtonID(String capID) {
         this.capID = capID;
     }
-        public Date getmHeure() {
+
+    public Date getmHeure() {
         return mHeure;
     }
 
@@ -51,8 +48,6 @@ public class Presence   implements Serializable {
     }
 
     public int isValue() {
-        return value;
+        return presenceValue;
     }
-
 }
-

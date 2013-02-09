@@ -14,8 +14,10 @@ import java.util.Map;
  * @author anisbenyoub
  */
 public class Lieu {
-    Map<Integer,List<Piece>> mesPieces;
-    Map<Integer,List<Acces>> mesAcces;
+
+    Map<Integer, List<Piece>> mesPieces;
+    Map<Integer, List<Acces>> mesAcces;
+
     public enum TypeLieu {
 
         MAISON,
@@ -27,59 +29,54 @@ public class Lieu {
     TypeLieu monType;
     String nomLieu;
     public int nombreEtage;
-    
-    public Lieu()
-    {
-        mesPieces= new HashMap<Integer,List<Piece>>();
-        mesAcces = new HashMap<Integer,List<Acces>>();
+
+    public Lieu() {
+        mesPieces = new HashMap<Integer, List<Piece>>();
+        mesAcces = new HashMap<Integer, List<Acces>>();
     }
 
-    public Map<Integer,List<Acces>> getMesAcces() {
+    public Map<Integer, List<Acces>> getMesAcces() {
         return mesAcces;
     }
 
-    public Map<Integer,List<Piece>> getMesPieces() {
+    public Map<Integer, List<Piece>> getMesPieces() {
         return mesPieces;
     }
-    
-    public void addPiece(Piece newPiece)
-    {
+
+    public void addPiece(Piece newPiece) {
         mesPieces.get(new Integer(newPiece.etage.intValue())).add(newPiece);
 
     }
-    
-    public void setNbEtage(Integer nb)
-    {
-        nombreEtage=nb;
-        for(int i= 0 ;i<=nb;i++)
-        {
-        mesPieces.put(i, new ArrayList<Piece>());
-        mesAcces.put(i, new ArrayList<Acces>());
+
+    public void setNbEtage(Integer nb) {
+        nombreEtage = nb;
+        for (int i = 0; i <= nb; i++) {
+            mesPieces.put(i, new ArrayList<Piece>());
+            mesAcces.put(i, new ArrayList<Acces>());
 
         }
 
 
     }
-        
-        
-    public void print()
-    {
-        /*
-        System.out.println("Lieu : nom "+nomLieu);
-        for(Piece p : mesPieces)
-        {
-            p.print();
+
+    public String toXML() {
+        String total = "<lieu nom=\"" + nomLieu + "\" type=\"" + monType + "\" nbEtage=\"" + nombreEtage + "\">\n";
+        for (int i = 0; i < nombreEtage; i++) {
+            for (Piece p : mesPieces.get(i)) {
+                total += p.toXml();
+            }
         }
-        
-        for(Acces a : mesAcces)
-        {
-            a.print();
+        for (int i = 0; i < nombreEtage; i++) {
+            for (Acces p : mesAcces.get(i)) {
+                total += p.toXml();
+            }
         }
-        
-        */
+        total += "</lieu>\n";
+
+        return total;
     }
-    public void addAcces(Acces newAcces)
-    {
+
+    public void addAcces(Acces newAcces) {
         mesAcces.get(newAcces.etage).add(newAcces);
     }
 
@@ -87,8 +84,30 @@ public class Lieu {
         return monType;
     }
 
-    public void setMonType(String monType) {
-        //this.monType = monType;
+    public void setMonType(String type) {
+
+        type=type.toLowerCase();
+        if(type.equals("maison"))
+        {
+             monType=TypeLieu.MAISON;
+        }
+        else if(type.equals("bureau"))
+        {
+             monType=TypeLieu.BUREAU;
+        }
+        else if(type.equals("presence"))
+        {
+             monType=TypeLieu.ATELIER;
+        }
+        else if(type.equals("contact"))
+        {
+             monType=TypeLieu.USINE;
+        }
+        else
+        {
+            monType=TypeLieu.AUTRE;
+        }
+    
     }
 
     public String getNomLieu() {
@@ -98,44 +117,34 @@ public class Lieu {
     public void setNomLieu(String nomLieu) {
         this.nomLieu = nomLieu;
     }
-    
-    public List<Piece> getListPieces()
-    {
+
+    public List<Piece> getListPieces() {
         List<Piece> l = new ArrayList<Piece>();
-        for(int i=0; i<mesPieces.size();i++)
-        {
-            for(Piece p: mesPieces.get(i))
-            {
+        for (int i = 0; i < mesPieces.size(); i++) {
+            for (Piece p : mesPieces.get(i)) {
                 l.add(p);
             }
         }
         return l;
     }
-     
-     public List<Acces> getListAcces()
-    {
+
+    public List<Acces> getListAcces() {
         List<Acces> l = new ArrayList<Acces>();
-        for(int i=0; i<mesAcces.size();i++)
-        {
-            for(Acces p: mesAcces.get(i))
-            {
+        for (int i = 0; i < mesAcces.size(); i++) {
+            for (Acces p : mesAcces.get(i)) {
                 l.add(p);
             }
         }
         return l;
     }
-    
-    public Piece getPieceByID(Integer id)
-    {
+
+    public Piece getPieceByID(Integer id) {
         List<Piece> l = getListPieces();
-        for(Piece p : l)
-        {
-            if (p.getId().equals(id))
-            {
+        for (Piece p : l) {
+            if (p.getId().equals(id)) {
                 return p;
             }
         }
         return null;
     }
-    
 }

@@ -30,13 +30,14 @@ import service.Service;
 public class ServerGHome extends Thread {
 
     protected int nbClick;
-    boolean serverOn;
-    Map<InetAddress, ComClient> myClientMap;
-    Service serviceManager;
-    Lieu monLieu;
-    List<Association> mesAssociations = new ArrayList<Association>();
+    protected boolean serverOn;
+    protected Map<InetAddress, ComClient> myClientMap;
+    protected Service serviceManager;
+    protected Lieu monLieu;
+    protected List<Association> mesAssociations = new ArrayList<Association>();
 
-    public ServerGHome() {
+    public ServerGHome() 
+    {
         nbClick = 0;
         myClientMap = new HashMap<InetAddress, ComClient>();
         serverOn = true;
@@ -153,7 +154,11 @@ public class ServerGHome extends Thread {
 
     public void getFromAPI(String msg) {
         String[] msg2 = msg.split(" ");
-        serviceManager.manageData(msg2[0], msg2[1], msg2[2]);
+        try {
+            serviceManager.manageData(msg2[0], msg2[1], msg2[2]);
+        } catch (Exception ex) {
+            Logger.getLogger(ServerGHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
         for (Association a : mesAssociations) {
             if (a.test()) {
                 a.execute();
@@ -169,7 +174,7 @@ public class ServerGHome extends Thread {
             value += msg2[i] + " ";
         }
         value += msg2[msg2.length - 1];
-
+ 
         for (Association a : mesAssociations) {
             if (a.toString().equals(value)) {
                 mesAssociations.remove(a);

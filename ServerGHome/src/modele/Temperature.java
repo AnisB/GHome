@@ -13,37 +13,36 @@ import javax.persistence.*;
  * @author anisbenyoub
  */
 @Entity
-public class Temperature   implements Serializable {
+public class Temperature implements Serializable {
 
-        @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    protected   Integer id;
+    protected Integer id;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    protected        Date mHeure;
-
+    protected Date mHeure;
     protected String capID;
-    protected  Float value;
+    protected Float tempValue;
+
     public Temperature() {
-        mHeure= new Date();
-                capID="-1";
+        super();
+        mHeure = new Date();
+        capID = "-1";
 
     }
 
-
-    public Temperature(String capID, Float value)
-    {
-        this.capID=capID;
-                mHeure= new Date();
-                this.value=value;
+    public Temperature(String capID, Float value) {
+        super();
+        this.capID = capID;
+        mHeure = new Date();
+        this.tempValue = value;
 
     }
-
-
 
     public void setButtonID(String capID) {
         this.capID = capID;
     }
-        public Date getmHeure() {
+
+    public Date getmHeure() {
         return mHeure;
     }
 
@@ -52,8 +51,6 @@ public class Temperature   implements Serializable {
     }
 
     public Float getValue() {
-        return value;
+        return tempValue;
     }
-
 }
-

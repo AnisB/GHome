@@ -1,54 +1,68 @@
-<lieu nom="myHome" type="maison" nbEtage="3">
-	<piece id="0" nom="Sejour" posx="0" posy="0" etage="0" largex="65" largey="100">
-		<capteur id="0021CBE2" type="Interrupteur"/>
-		<capteur id="00893382" type="Temperature"/>
-	</piece>
-	
-	<piece id="1" nom="Chambre Marian" posx="70" posy="70" etage="0" largex="50" largey="80">
-
-		<actionneur id="0" type="Luminosite"/>
-		<capteur id="0882726" type="Interrupteur"/>
-
-	</piece>
-	
-
-	<piece id="2" nom="Chambre Fred" posx="70" posy="0" etage="0" largex="70" largey="65">
-
-		<actionneur id="0JZNDJ" type="Luminosite"/>
-		<capteur id="0DJNDJZ" type="Interrupteur"/>
-	</piece>
-	
-	<piece id="4" nom="Salon japonais" posx="0" posy="0" etage="1" largex="65" largey="100">
-
-		<capteur id="0OIUYG" type="Interrupteur"/>
-		<capteur id="0JFVBND" type="Luminosite"/>
-	</piece>
-
-	<piece id="6" nom="Chambre d'amis" posx="0" posy="0" etage="2" largex="135" largey="120">
-	</piece>
-	
-	<piece id="7" nom="Sejour" posx="140" posy="80" etage="2" largex="140" largey="80">
-	</piece>
-		
-	<acces id="8" nom="Porte" posx="65" posy="80" etage="0" taillex="5" tailley="20">
-		<capteur id="09DDZD" type="Position"/>
-		<pieceVoisine id="0"/>
-		<pieceVoisine id="1"/>
-	</acces>
-	
-	<acces id="9" nom="Porte" posx="75" posy="65" etage="0" taillex="20" tailley="5">
-		<capteur id="10" type="Position"/>
-		<pieceVoisine id="1"/>
-		<pieceVoisine id="2"/>
-	</acces>
-	<acces id="10" nom="Porte" posx="135" posy="100" etage="2" taillex="5" tailley="20">
-		<capteur id="11" type="Position"/>
-		<pieceVoisine id="1"/>
-		<pieceVoisine id="2"/>
-	</acces>
-		<acces id="11" nom="Porte" posx="65" posy="20" etage="0" taillex="5" tailley="20">
-		<capteur id="12" type="Position"/>
-		<pieceVoisine id="1"/>
-		<pieceVoisine id="2"/>
-	</acces>
+<lieu nom="myHome" type="MAISON" nbEtage="3">
+<piece id="0" nom="Sejour" posx="0" posy="0" etage="0" largex="65" largey="100">
+<capteur id="0021CBE2" type="interrupteur"/>
+<capteur id="00893382" type="temperature"/>
+</piece>
+<piece id="1" nom="Chambre Marian" posx="70" posy="70" etage="0" largex="50" largey="80">
+<capteur id="0882726" type="interrupteur"/>
+<actionneur id="0" type="autre"/>
+</piece>
+<piece id="2" nom="Chambre Fred" posx="70" posy="0" etage="0" largex="70" largey="65">
+<capteur id="0DJNDJZ" type="interrupteur"/>
+<actionneur id="0JZNDJ" type="autre"/>
+</piece>
+<piece id="4" nom="Salon japonais" posx="0" posy="0" etage="1" largex="65" largey="100">
+<capteur id="0OIUYG" type="interrupteur"/>
+<capteur id="0JFVBND" type="autre"/>
+</piece>
+<piece id="6" nom="Chambre d'amis" posx="0" posy="0" etage="2" largex="135" largey="120">
+</piece>
+<piece id="7" nom="Sejour" posx="140" posy="80" etage="2" largex="140" largey="80">
+</piece>
+<acces id="8" nom="Porte" posx="65" posy="80" etage="0" taillex="5" tailley="20">
+<capteur id="09DDZD" type="autre"/>
+</acces>
+<acces id="9" nom="Porte" posx="75" posy="65" etage="0" taillex="20" tailley="5">
+<capteur id="10" type="autre"/>
+</acces>
+<acces id="11" nom="Porte" posx="65" posy="20" etage="0" taillex="5" tailley="20">
+<capteur id="12" type="autre"/>
+</acces>
+<acces id="10" nom="Porte" posx="135" posy="100" etage="2" taillex="5" tailley="20">
+<capteur id="11" type="autre"/>
+</acces>
+</lieu><lieu nom="myHome" type="MAISON" nbEtage="3">
+<piece id="0" nom="Sejour" posx="0" posy="0" etage="0" largex="65" largey="100">
+<capteur id="0021CBE2" type="interrupteur"/>
+<capteur id="00893382" type="temperature"/>
+</piece>
+<piece id="1" nom="Chambre Marian" posx="70" posy="70" etage="0" largex="50" largey="80">
+<capteur id="0882726" type="interrupteur"/>
+<actionneur id="0" type="autre"/>
+</piece>
+<piece id="2" nom="Chambre Fred" posx="70" posy="0" etage="0" largex="70" largey="65">
+<capteur id="0DJNDJZ" type="interrupteur"/>
+<actionneur id="0JZNDJ" type="autre"/>
+</piece>
+<piece id="4" nom="Salon japonais" posx="0" posy="0" etage="1" largex="65" largey="100">
+<capteur id="0OIUYG" type="interrupteur"/>
+<capteur id="0JFVBND" type="autre"/>
+</piece>
+<piece id="6" nom="Chambre d'amis" posx="0" posy="0" etage="2" largex="135" largey="120">
+<capteur id="lolilol" type="contact"/>
+</piece>
+<piece id="7" nom="Sejour" posx="140" posy="80" etage="2" largex="140" largey="80">
+</piece>
+<acces id="8" nom="Porte" posx="65" posy="80" etage="0" taillex="5" tailley="20">
+<capteur id="09DDZD" type="autre"/>
+</acces>
+<acces id="9" nom="Porte" posx="75" posy="65" etage="0" taillex="20" tailley="5">
+<capteur id="10" type="autre"/>
+</acces>
+<acces id="11" nom="Porte" posx="65" posy="20" etage="0" taillex="5" tailley="20">
+<capteur id="12" type="autre"/>
+</acces>
+<acces id="10" nom="Porte" posx="135" posy="100" etage="2" taillex="5" tailley="20">
+<capteur id="11" type="autre"/>
+</acces>
 </lieu>

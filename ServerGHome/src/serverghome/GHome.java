@@ -13,15 +13,10 @@ import util.JpaUtil;
 public class GHome {
     public static void main(String args[])
     {
-        System.out.println("Application begin");
         ServerGHome myServer = new ServerGHome();
         myServer.start();
         Api api = new Api(myServer);
-        api.start();
-        System.out.println("Serveur lancé");
-
-        
-        
+        api.start();        
     }
     
 }

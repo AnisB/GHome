@@ -13,21 +13,17 @@ import javax.persistence.*;
  * @author anisbenyoub
  */
 @Entity
-public class Client   implements Serializable {
+public class Client implements Serializable {
 
-        @Id
-        protected   String id;
-    protected        String mdp;
+    @Id
+    protected String id;
+    protected String mdp;
 
-    public Client() 
-    {
-
+    public Client() {
     }
 
-    public Client(String id, String mdp)
-    {
-        this.id=id;
-        this.mdp=mdp;
+    public Client(String id, String mdp) {
+        this.id = id;
+        this.mdp = mdp;
     }
 }
-

@@ -14,39 +14,24 @@ import util.JpaUtil;
  * @author anisbenyoub
  */
 public class PresenceDao {
-     public PresenceDao(){
-        
-        }
-         public void create(Presence aPresence) throws Exception  {
 
-        JpaUtil.openEntityManager();
-        JpaUtil.getEntityManagerTransaction().begin();
-        JpaUtil.getEntityManager().persist(aPresence);
-        JpaUtil.getEntityManagerTransaction().commit();
-        JpaUtil.closeEntityManager();
+    public PresenceDao() {
     }
 
-         
-       public Presence getPresence(String Theid)
-       {   
-           try
-            {
-       JpaUtil.openEntityManager();
-        JpaUtil.getEntityManagerTransaction().begin();
+    public void create(Presence aPresence) throws Exception {
+        JpaUtil.getEntityManager().persist(aPresence);
+    }
+
+    public Presence getPresence(String Theid) {
+        try {
             Query query = (Query) JpaUtil.getEntityManager().createQuery("SELECT p from Presence p WHERE c.capID=:id ORDER BY c.mHeure DESC");
             List<Presence> t = query.setParameter("id", Theid).getResultList();
-            if(!t.isEmpty())
-            {
-                        JpaUtil.closeEntityManager();
+            if (!t.isEmpty()) {
                 return t.get(0);
             }
-            }
-           catch(Exception ex)
-           {
-              ex.printStackTrace();
-           }
-                return new Presence(Theid,-1); 
+        } catch (Exception ex) {
+        }
+        return new Presence(Theid, -1);
 
-       }
-
+    }
 }

@@ -13,28 +13,26 @@ import javax.persistence.*;
  * @author anisbenyoub
  */
 @Entity
-public class Click   implements Serializable {
+public class Click implements Serializable {
 
-        @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    protected   Integer id;
+    protected Integer id;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    protected        Date mHeure;
+    protected Date mHeure;
     protected String buttonID;
-    protected int value;
+    protected int clickValue;
 
     public Click() {
-        mHeure= new Date();
-                buttonID="-1";
+        mHeure = new Date();
+        buttonID = "-1";
 
     }
 
-
-    public Click(String aButtonID, int aValue)
-    {
-        buttonID=aButtonID;
-        mHeure= new Date();
-        value=aValue;
+    public Click(String aButtonID, int aValue) {
+        buttonID = aButtonID;
+        mHeure = new Date();
+        clickValue = aValue;
 
     }
 
@@ -45,7 +43,8 @@ public class Click   implements Serializable {
     public void setButtonID(String buttonID) {
         this.buttonID = buttonID;
     }
-        public Date getmHeure() {
+
+    public Date getmHeure() {
         return mHeure;
     }
 
@@ -54,8 +53,6 @@ public class Click   implements Serializable {
     }
 
     public int getValue() {
-        return value;
+        return clickValue;
     }
-    
 }
-

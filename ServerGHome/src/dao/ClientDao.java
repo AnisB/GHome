@@ -19,11 +19,7 @@ public class ClientDao {
          public void create(String id,  String mdp) throws Exception  {
 
         Client newC = new Client(id,mdp);
-        JpaUtil.openEntityManager();
-        JpaUtil.getEntityManagerTransaction().begin();
         JpaUtil.getEntityManager().persist(newC);
-        JpaUtil.getEntityManagerTransaction().commit();
-        JpaUtil.closeEntityManager();
     }
        public boolean testIfRegistred(String id, String mdp)
        {   

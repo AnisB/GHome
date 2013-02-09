@@ -13,7 +13,7 @@ import javax.persistence.*;
  * @author anisbenyoub
  */
 @Entity
-public class Contact implements Serializable {
+public class Tension implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,23 +21,19 @@ public class Contact implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     protected Date mHeure;
     protected String capID;
-    protected int contactValue;
+    protected Float tensionValue;
 
-    public Contact() {
+    public Tension() {
         mHeure = new Date();
         capID = "-1";
 
     }
 
-    public Contact(String capID, int aValue) {
+    public Tension(String capID, Float value) {
         this.capID = capID;
         mHeure = new Date();
-        contactValue = aValue;
+        this.tensionValue = value;
 
-    }
-
-    public String getCapID() {
-        return capID;
     }
 
     public void setButtonID(String capID) {
@@ -48,11 +44,11 @@ public class Contact implements Serializable {
         return mHeure;
     }
 
-    public void setmHeure(Date mHeure) {
-        this.mHeure = mHeure;
+    public String getCapID() {
+        return capID;
     }
 
-    public int getValue() {
-        return contactValue;
+    public Float getValue() {
+        return tensionValue;
     }
 }

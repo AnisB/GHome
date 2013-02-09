@@ -19,26 +19,18 @@ public class ContactDao {
     }
 
     public void create(Contact aContact) throws Exception {
-
-        JpaUtil.openEntityManager();
-        JpaUtil.getEntityManagerTransaction().begin();
         JpaUtil.getEntityManager().persist(aContact);
-        JpaUtil.getEntityManagerTransaction().commit();
-        JpaUtil.closeEntityManager();
     }
 
     public Contact getIsInContact(String Theid) {
         try {
-            JpaUtil.openEntityManager();
-            JpaUtil.getEntityManagerTransaction().begin();
+
             Query query = (Query) JpaUtil.getEntityManager().createQuery("SELECT c from Contact c WHERE c.capID=:id ORDER BY c.mHeure DESC");
             List<Contact> t = query.setParameter("id", Theid).getResultList();
             if (!t.isEmpty()) {
-                JpaUtil.closeEntityManager();
                 return t.get(0);
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
         }
         return new Contact(Theid, -1);
 
