@@ -13,6 +13,7 @@ import java.awt.List;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -93,11 +94,20 @@ public class Window extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         list1.setLocation(new java.awt.Point(700, 700));
+        list1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                list1ItemStateChanged(evt);
+            }
+        });
+        list1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                list1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Capteurs et Actionneurs");
 
@@ -177,9 +187,6 @@ public class Window extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -255,6 +262,7 @@ public class Window extends javax.swing.JFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         map.deleteCalled(list1.getSelectedItem());
+        deleteButton.setEnabled(false);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void idFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idFieldActionPerformed
@@ -275,10 +283,10 @@ public class Window extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         String newMap = map.monLieu.toXML();
         System.out.println(newMap);
-        FileWriter fichier;
+        PrintWriter fichier;
         try {
-            fichier = new FileWriter(new File("../map.xml"), true);
-            fichier.
+            fichier = new PrintWriter(new File("../map.xml"));
+            fichier.print("");
             fichier.append(newMap);
             fichier.close();
 
@@ -340,6 +348,21 @@ public class Window extends javax.swing.JFrame {
         testToAdd();
     }//GEN-LAST:event_idFieldKeyTyped
 
+    private void list1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_list1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_list1ActionPerformed
+
+    private void list1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_list1ItemStateChanged
+        if(map.selected!=-1 && list1.getSelectedItem()!=null)
+        {
+            deleteButton.setEnabled(true);
+        }
+        else
+        {
+            deleteButton.setEnabled(false);
+        }
+    }//GEN-LAST:event_list1ItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -390,7 +413,6 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private java.awt.List list1;

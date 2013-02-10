@@ -3,21 +3,31 @@
 <capteur id="0021CBE2" type="interrupteur"/>
 <capteur id="00893382" type="temperature"/>
 </piece>
-<piece id="1" nom="Chambre Marian" posx="70" posy="70" etage="0" largex="50" largey="80">
+<piece id="1" nom="Cuisine" posx="70" posy="70" etage="0" largex="65" largey="80">
 <capteur id="0882726" type="interrupteur"/>
 <actionneur id="0" type="autre"/>
 </piece>
-<piece id="2" nom="Chambre Fred" posx="70" posy="0" etage="0" largex="70" largey="65">
+<piece id="2" nom="Chambre 1" posx="70" posy="0" etage="0" largex="90" largey="65">
 <capteur id="0DJNDJZ" type="interrupteur"/>
 <actionneur id="0JZNDJ" type="autre"/>
 </piece>
-<piece id="4" nom="Salon japonais" posx="0" posy="0" etage="1" largex="65" largey="100">
+<piece id="3" nom="Hall" posx="0" posy="105" etage="0" largex="65" largey="45">
+</piece>
+<piece id="23" nom="Couloir" posx="0" posy="100" etage="1" largex="30" largey="50">
+</piece>
+<piece id="24" nom="Salle de bain" posx="35" posy="105" etage="1" largex="30" largey="40">
+</piece>
+<piece id="4" nom="Salon japonais" posx="0" posy="0" etage="1" largex="120" largey="95">
 <capteur id="0OIUYG" type="interrupteur"/>
 <capteur id="0JFVBND" type="autre"/>
 </piece>
-<piece id="6" nom="Chambre d'amis" posx="0" posy="0" etage="2" largex="135" largey="120">
+<piece id="6" nom="Grand salon" posx="0" posy="0" etage="2" largex="135" largey="150">
+<capteur id="DKZDZ" type="presence"/>
+<actionneur id="ZKZD?K" type="lumiere"/>
 </piece>
-<piece id="7" nom="Sejour" posx="140" posy="80" etage="2" largex="140" largey="80">
+<piece id="7" nom="Chambre d'amis 2" posx="140" posy="80" etage="2" largex="140" largey="80">
+<capteur id="872U2E" type="contact"/>
+<capteur id="ZDK?D" type="presence"/>
 </piece>
 <acces id="8" nom="Porte" posx="65" posy="80" etage="0" taillex="5" tailley="20">
 <capteur id="09DDZD" type="autre"/>
@@ -28,41 +38,19 @@
 <acces id="11" nom="Porte" posx="65" posy="20" etage="0" taillex="5" tailley="20">
 <capteur id="12" type="autre"/>
 </acces>
-<acces id="10" nom="Porte" posx="135" posy="100" etage="2" taillex="5" tailley="20">
-<capteur id="11" type="autre"/>
+<acces id="12" nom="Porte" posx="20" posy="100" etage="0" taillex="20" tailley="5">
 </acces>
-</lieu><lieu nom="myHome" type="MAISON" nbEtage="3">
-<piece id="0" nom="Sejour" posx="0" posy="0" etage="0" largex="65" largey="100">
-<capteur id="0021CBE2" type="interrupteur"/>
-<capteur id="00893382" type="temperature"/>
-</piece>
-<piece id="1" nom="Chambre Marian" posx="70" posy="70" etage="0" largex="50" largey="80">
-<capteur id="0882726" type="interrupteur"/>
-<actionneur id="0" type="autre"/>
-</piece>
-<piece id="2" nom="Chambre Fred" posx="70" posy="0" etage="0" largex="70" largey="65">
-<capteur id="0DJNDJZ" type="interrupteur"/>
-<actionneur id="0JZNDJ" type="autre"/>
-</piece>
-<piece id="4" nom="Salon japonais" posx="0" posy="0" etage="1" largex="65" largey="100">
-<capteur id="0OIUYG" type="interrupteur"/>
-<capteur id="0JFVBND" type="autre"/>
-</piece>
-<piece id="6" nom="Chambre d'amis" posx="0" posy="0" etage="2" largex="135" largey="120">
-<capteur id="lolilol" type="contact"/>
-</piece>
-<piece id="7" nom="Sejour" posx="140" posy="80" etage="2" largex="140" largey="80">
-</piece>
-<acces id="8" nom="Porte" posx="65" posy="80" etage="0" taillex="5" tailley="20">
+<acces id="13" nom="Escalier" posx="0" posy="150" etage="0" taillex="65" tailley="20">
+</acces>
+<acces id="25" nom="Porte" posx="30" posy="105" etage="1" taillex="5" tailley="20">
 <capteur id="09DDZD" type="autre"/>
 </acces>
-<acces id="9" nom="Porte" posx="75" posy="65" etage="0" taillex="20" tailley="5">
-<capteur id="10" type="autre"/>
+<acces id="40" nom="Porte" posx="5" posy="95" etage="1" taillex="20" tailley="5">
 </acces>
-<acces id="11" nom="Porte" posx="65" posy="20" etage="0" taillex="5" tailley="20">
-<capteur id="12" type="autre"/>
+<acces id="13" nom="Escalier" posx="0" posy="150" etage="1" taillex="65" tailley="20">
 </acces>
 <acces id="10" nom="Porte" posx="135" posy="100" etage="2" taillex="5" tailley="20">
-<capteur id="11" type="autre"/>
+</acces>
+<acces id="13" nom="Escalier" posx="0" posy="150" etage="2" taillex="65" tailley="20">
 </acces>
 </lieu>
