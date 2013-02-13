@@ -4,8 +4,10 @@
  */
 package service;
 
+import api.Api;
 import dao.*;
 import modele.*;
+import serverghome.ServerGHome;
 import util.JpaUtil;
 
 /**
@@ -13,7 +15,7 @@ import util.JpaUtil;
  * @author anis
  */
 public class Service {
-
+protected Api monApi;
 // Méthodes relatives aux Clicks
     public void addClick(Click aClick) throws Exception {
         JpaUtil.openEntityManager();
@@ -167,7 +169,9 @@ public class Service {
         return "G0 NOTFOUND";
     }
 
-    public void sendOrder(String conteneur, String idCapteur, String typeData, String optionalValue) {
+    public void sendOrder(String idCapteur, String typeData, String optionalValue, ServerGHome s) {
+        Api  a=s.getApi();
+        a.Actionner(typeData,"FF9F1E05", optionalValue);
     }
 
     public void manageData(String typeData, String idCapteur, String value) throws Exception {
@@ -192,8 +196,8 @@ public class Service {
             }
         } else if (typeData.contains("O")) {
 
-            Click c = new Click(idCapteur, Integer.valueOf(value));
-            ClickDao cd = new ClickDao();
+            Contact c = new Contact(idCapteur, Integer.valueOf(value));
+            ContactDao cd = new ContactDao();
             try {
                 cd.create(c);
             } catch (Exception ex) {

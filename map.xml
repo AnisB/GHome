@@ -12,6 +12,7 @@
 <actionneur id="0JZNDJ" type="autre"/>
 </piece>
 <piece id="3" nom="Hall" posx="0" posy="105" etage="0" largex="65" largey="45">
+<capteur id="0001B291" type="contact"/>
 </piece>
 <piece id="23" nom="Couloir" posx="0" posy="100" etage="1" largex="30" largey="50">
 </piece>
@@ -26,8 +27,7 @@
 <actionneur id="ZKZD?K" type="lumiere"/>
 </piece>
 <piece id="7" nom="Chambre d'amis 2" posx="140" posy="80" etage="2" largex="140" largey="80">
-<capteur id="872U2E" type="contact"/>
-<capteur id="ZDK?D" type="presence"/>
+<capteur id="0001B292" type="contact"/>
 </piece>
 <acces id="8" nom="Porte" posx="65" posy="80" etage="0" taillex="5" tailley="20">
 <capteur id="09DDZD" type="autre"/>

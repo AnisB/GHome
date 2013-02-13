@@ -122,6 +122,13 @@ public class ComClient extends Thread {
                         out.flush();
                         mapUpdate=true;
                 }
+                if(message.isEmpty())
+                {
+                    out.println("ERROR");
+                    out.flush();
+                }
+                else
+                {
                 switch (message.charAt(0)) {
                     // We are in the case of a disconnection
                     case 'D':
@@ -157,7 +164,7 @@ public class ComClient extends Thread {
                         out.flush();
                         break;
                     case 'O':
-                        serviceManager.sendOrder(message.split(" ")[0], message.split(" ")[1], message.split(" ")[2], message.split(" ")[3]);
+                        serviceManager.sendOrder(message.split(" ")[1], message.split(" ")[2], message.split(" ")[3], myHost);
                         out.println("O1");
                         out.flush();
                         break;
@@ -173,6 +180,7 @@ public class ComClient extends Thread {
                     default:
                         break;
                 }
+            }
             }
 
         } catch (IOException ex) {

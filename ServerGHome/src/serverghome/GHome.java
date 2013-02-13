@@ -13,9 +13,11 @@ import util.JpaUtil;
 public class GHome {
     public static void main(String args[])
     {
+        
         ServerGHome myServer = new ServerGHome();
         myServer.start();
         Api api = new Api(myServer);
+        myServer.setAPI(api);
         api.start();        
     }
     

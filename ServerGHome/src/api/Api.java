@@ -10,8 +10,6 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modele.home.Capteur;
 import modele.home.Lieu;
 import modele.home.Piece;
@@ -38,8 +36,8 @@ public class Api extends Thread{
         BufferedReader in;
 
         try {
-            //socket = new Socket("134.214.105.28", 5000);
-            socket = new Socket("127.0.0.1", 5000);
+            socket = new Socket("134.214.105.28", 5000);
+            //socket = new Socket("127.0.0.1", 5000);
             System.out.println("Demande de connexion");
             
 
@@ -48,11 +46,6 @@ public class Api extends Thread{
 
             Lieu lieu = null;
             while(lieu==null){
-                try {
-                    Thread.sleep(20);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Api.class.getName()).log(Level.SEVERE, null, ex);
-                }
                 System.out.print("");
                 lieu = myServer.getMonLieu();
             }
@@ -78,7 +71,7 @@ public class Api extends Thread{
                 
                 test = CorrigerTrame(test);
                 
-                System.out.println(test);
+                //System.out.println(test);
                 
                 //analyse de cette trame
                 AnalyseTrame(test);
@@ -119,7 +112,6 @@ public class Api extends Thread{
             if(id.equals(capteur.getId())){
                 System.out.println(capteur.getId());
                 if(capteur.getMonType()==Capteur.Type.INTERRUPTEUR){
-                    
                     AnalyseInterrupteur(capteur.getId(), trame);
                 }
                 else if(capteur.getMonType()==Capteur.Type.TEMPERATURE){
@@ -130,7 +122,6 @@ public class Api extends Thread{
                 }
                 else if(capteur.getMonType()==Capteur.Type.PRESENCE){
                     AnalysePresence(capteur.getId(), trame);
-                    Actionner("FF9F1E08", true);
                 }
                 else return false;
                 return true;
@@ -210,16 +201,17 @@ public class Api extends Thread{
 
     private void AnalyseContact(String id, String trame){
     //valeur intéressante sur le bit1
-        int valueContact = trame.charAt(8)-48;
+        System.out.println("tramrecue "+trame);
+        int valueContact = trame.charAt(15)-48;
         if (valueContact == 8){
             //Capteur ouvert
             myServer.getFromAPI("O "+id+" 0");
-            System.out.println("capteur ouvert");
+            System.out.println("capteur fermé");
         }
-        else if (valueContact == 9){
+        if (valueContact == 9){
             //Capteur fermé
             myServer.getFromAPI("O "+id+" 1");
-            System.out.println("capteur fermé");
+            System.out.println("capteur ouvert");
         }
         else{
             System.out.println("Mauvaise valeur pour la valeur du capteur de contact");
@@ -227,14 +219,14 @@ public class Api extends Thread{
         }
     }
     
-    public void Actionner(String idActionneur, boolean enclenche) {
+    public void Actionner(String type, String id, String value) {
         
-        String trame;
-        if(enclenche==true){
-            trame= new String("A55A0B0500000000"+idActionneur+"30");
+        String trame = new String();
+        if(value.contains("1")){
+            trame= new String("A55A6B0550000000"+id+"30");
         }
-        else {
-            trame= new String("A55A0B0700000000"+idActionneur+"30");
+        else if(value.contains("0")){
+            trame= new String("A55A6B0570000000"+id+"30");
         }
         String addition = new String();
         addition = trame.substring(4, 26);

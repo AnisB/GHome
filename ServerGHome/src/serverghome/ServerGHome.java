@@ -7,6 +7,7 @@ package serverghome;
 import Interface.MapLieu;
 import Interface.Window;
 import XMLParser.Crafter;
+import api.Api;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -35,6 +36,7 @@ public class ServerGHome extends Thread {
     protected Service serviceManager;
     protected Lieu monLieu;
     protected List<Association> mesAssociations = new ArrayList<Association>();
+    protected Api monApi;
 
     public ServerGHome() 
     {
@@ -42,6 +44,16 @@ public class ServerGHome extends Thread {
         myClientMap = new HashMap<InetAddress, ComClient>();
         serverOn = true;
         serviceManager = new Service();
+    }
+    
+    public void setAPI(Api api)
+    {
+        monApi=api;
+    }
+    
+    public Api getApi()
+    {
+        return monApi;
     }
 
     public Service getServiceManager() {
@@ -111,9 +123,6 @@ public class ServerGHome extends Thread {
 
     }
 
-    public synchronized int getNbClick() {
-        return serviceManager.getNbClick();
-    }
 
     public Lieu getMonLieu() {
         return monLieu;
@@ -137,7 +146,7 @@ public class ServerGHome extends Thread {
         for (String s : msg.split(" ")) {
             attributes.add(s);
         }
-        Association newAsso = new Association(attributes);
+        Association newAsso = new Association(attributes,this);
         mesAssociations.add(newAsso);
     }
 
@@ -158,7 +167,9 @@ public class ServerGHome extends Thread {
             Logger.getLogger(ServerGHome.class.getName()).log(Level.SEVERE, null, ex);
         }
         for (Association a : mesAssociations) {
-            if (a.test()) {
+            if (a.test()) 
+            {
+                System.out.println("Asso vérifiée");
                 a.execute();
             }
         }
