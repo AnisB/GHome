@@ -56,12 +56,13 @@ public class Association {
         if(myAttributes.get(4+decalage).equals("Exact"))
         {
             System.out.println("Rendu s "+s);
-            System.out.println("G1 "+myAttributes.get(5));
-            if( s.equals("G1 "+myAttributes.get(5)))
+            System.out.println("G1 "+myAttributes.get(5+decalage));
+            if( s.equals("G1 "+myAttributes.get(5+decalage)))
             {
-                decalage=+4;
+                
+                decalage+=4;
                 tmp=4;
-                System.out.println("niquelchrome");
+                System.out.println("niquelchrome " +decalage);
                 continue;
             }
             else
@@ -81,7 +82,7 @@ public class Association {
             System.out.println("UpperBound "+ub);
             if ((is>lb)&&(is<ub))
             {
-                decalage=+5;
+                decalage+=5;
                 tmp=4;
                 continue;
             }
@@ -94,10 +95,10 @@ public class Association {
         {
             String v =s.split(" ")[1];
             Integer is=Integer.valueOf(v);
-            Integer lb=Integer.valueOf(myAttributes.get(5));
+            Integer lb=Integer.valueOf(myAttributes.get(5+decalage));
             if ((is>lb))
             {
-                decalage=+4;
+                decalage+=4;
                 tmp=4;
                 continue;
             }
@@ -110,7 +111,7 @@ public class Association {
         {
             String v =s.split(" ")[1];
             Integer is=Integer.valueOf(v);
-            Integer ub=Integer.valueOf(myAttributes.get(5));
+            Integer ub=Integer.valueOf(myAttributes.get(5+decalage));
             if ((is<ub))
             {
                 decalage+=4;
@@ -129,6 +130,11 @@ public class Association {
     public void execute()
     {
         Integer declage2=decalage-tmp;
+        System.out.println(decalage);
+         System.out.println(tmp);
+        System.out.println(myAttributes.get(6+declage2));
+        System.out.println(myAttributes.get(7+declage2));
+        System.out.println(myAttributes.get(8+declage2));
         serviceManager.sendOrder(myAttributes.get(6+declage2),myAttributes.get(7+declage2),myAttributes.get(8+declage2),msg);
     }
     
