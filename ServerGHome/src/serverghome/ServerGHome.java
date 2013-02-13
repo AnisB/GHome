@@ -53,8 +53,7 @@ public class ServerGHome extends Thread {
         try {
             try {
                 Crafter aHomeCrafter = new Crafter("../map.xml");
-
-                Window uneMap = new Window(aHomeCrafter.getLieu());
+                Window uneMap = new Window(aHomeCrafter.getLieu(),this);
                 monLieu = aHomeCrafter.getLieu();
                 uneMap.setVisible(true);
             } catch (DocumentException ex) {
@@ -130,8 +129,7 @@ public class ServerGHome extends Thread {
             stringBuilder.append(line);
             stringBuilder.append(ls);
         }
-
-        return stringBuilder.toString();
+        return stringBuilder.toString().replace('\r', ' ');
     }
 
     public void addAssociation(String msg) {
@@ -202,5 +200,14 @@ public class ServerGHome extends Thread {
             }
         }
         return false;
+    }
+    
+    public synchronized void obsMap()
+    {
+                for(InetAddress i: myClientMap.keySet())
+                {
+                    myClientMap.get(i).setObsMap();
+                }
+
     }
 }

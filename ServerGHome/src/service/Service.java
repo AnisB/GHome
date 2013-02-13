@@ -70,7 +70,7 @@ public class Service {
                     return "G1 " + T.getValue();
                 } else {
                     JpaUtil.closeEntityManager();
-                    return "G0 UNKNOWN";
+                    return "G0 NOTINIT";
                 }
             } catch (Exception ex) {
                 JpaUtil.closeEntityManager();
@@ -173,7 +173,7 @@ public class Service {
     public void manageData(String typeData, String idCapteur, String value) throws Exception {
         // Ouverture de l'entity manager
         JpaUtil.openEntityManager();
-
+        JpaUtil.getEntityManagerTransaction().begin();
         if (typeData.contains("T")) {
 
             Temperature temp = new Temperature(idCapteur, Float.valueOf(value));

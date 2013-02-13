@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import modele.home.Actionneur;
 import modele.home.Capteur;
 import modele.home.Lieu;
+import serverghome.ServerGHome;
 
 /**
  *
@@ -29,6 +30,7 @@ public class Window extends javax.swing.JFrame {
 
     MapLieu map;
     private final JButton mapSave;
+    ServerGHome myServ;
 
     public Window() {
         mapSave = new javax.swing.JButton();
@@ -36,7 +38,8 @@ public class Window extends javax.swing.JFrame {
 
     }
 
-    public Window(Lieu a) {
+    public Window(Lieu a, ServerGHome m) {
+        myServ=m;
         initComponents();
         map = new MapLieu(a, this);
         map.setBounds(0, 0, 400 * a.nombreEtage, 400);
@@ -289,6 +292,8 @@ public class Window extends javax.swing.JFrame {
             fichier.print("");
             fichier.append(newMap);
             fichier.close();
+            System.out.println("Map outdated");
+            myServ.obsMap();
 
         } catch (IOException ex) {
             Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);

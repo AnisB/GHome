@@ -24,12 +24,14 @@ public class TempDao {
 
     public Temperature getLastTemp(String id) {
         try {
-            Query query = (Query) JpaUtil.getEntityManager().createQuery("SELECT c from Temperature c WHERE c.capID=:id :ASC");
+            Query query = (Query) JpaUtil.getEntityManager().createQuery("SELECT c from Temperature c WHERE c.capID=:id ORDER BY c.mHeure DESC");
             List<Temperature> t = (List<Temperature>) query.setParameter("id", id).getResultList();
+            System.out.println("list");
             return t.get(0);
         } catch (Exception ex) {
+            return null;
         }
-        return new Temperature(id, new Float(99.0));
+
 
     }
 }

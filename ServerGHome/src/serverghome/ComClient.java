@@ -25,6 +25,7 @@ public class ComClient extends Thread {
     Socket myClient;
     protected PrintWriter out;
     ServerGHome myHost;
+    boolean mapUpdate = true;
 
     public ComClient(ServerSocket server, Socket client, ServerGHome host) {
         myClientConnected = true;
@@ -110,8 +111,17 @@ public class ComClient extends Thread {
             out.println("C1");
             out.flush();
             while (myClientConnected) {
+                
                 in = new BufferedReader(new InputStreamReader(myClient.getInputStream()));
                 String message = in.readLine();
+                
+                if(mapUpdate==false)
+                {
+                        String map = myHost.getMap();
+                        out.println("OBS " + map.replace('\n', ' '));
+                        out.flush();
+                        mapUpdate=true;
+                }
                 switch (message.charAt(0)) {
                     // We are in the case of a disconnection
                     case 'D':
@@ -136,6 +146,7 @@ public class ComClient extends Thread {
                         if (myHost.capteurExists(message.split(" ")[1])) {
                             info = serviceManager.getData(message.split(" ")[1], message.split(" ")[2]);
                         } else {
+                            info="G0 NOTFOUND";
                         }
                         out.println(info);
                         out.flush();
@@ -167,5 +178,10 @@ public class ComClient extends Thread {
         } catch (IOException ex) {
             Logger.getLogger(ComClient.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public synchronized void setObsMap()
+    {
+        mapUpdate=false;
     }
 }

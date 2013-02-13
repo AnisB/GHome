@@ -24,7 +24,7 @@ public class LuminositeDao {
 
     public Luminosite getLastLumi(String id) {
         try {
-            Query query = (Query) JpaUtil.getEntityManager().createQuery("SELECT c from Luminosite c WHERE c.capID=:id :ASC");
+            Query query = (Query) JpaUtil.getEntityManager().createQuery("SELECT c from Luminosite c WHERE c.capID=:id ORDER BY c.mHeure DESC");
             List<Luminosite> t = (List<Luminosite>) query.setParameter("id", id).getResultList();
             return t.get(0);
         } catch (Exception ex) {

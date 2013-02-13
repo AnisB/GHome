@@ -31,7 +31,7 @@ public class Temperature implements Serializable {
     }
 
     public Temperature(String capID, Float value) {
-        super();
+        
         this.capID = capID;
         mHeure = new Date();
         this.tempValue = value;

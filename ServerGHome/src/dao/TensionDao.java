@@ -25,7 +25,7 @@ public class TensionDao {
 
     public Tension getLastTens(String id) {
         try {
-            Query query = (Query) JpaUtil.getEntityManager().createQuery("SELECT c from Tension c WHERE c.capID=:id :ASC");
+            Query query = (Query) JpaUtil.getEntityManager().createQuery("SELECT c from Tension c WHERE c.capID=:id ORDER BY c.mHeure DESC");
             List<Tension> t = (List<Tension>) query.setParameter("id", id).getResultList();
             return t.get(0);
         } catch (Exception ex) {

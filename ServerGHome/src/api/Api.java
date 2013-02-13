@@ -10,6 +10,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modele.home.Capteur;
 import modele.home.Lieu;
 import modele.home.Piece;
@@ -36,8 +38,8 @@ public class Api extends Thread{
         BufferedReader in;
 
         try {
-            socket = new Socket("134.214.105.28", 5000);
-            //socket = new Socket("127.0.0.1", 5000);
+            //socket = new Socket("134.214.105.28", 5000);
+            socket = new Socket("127.0.0.1", 5000);
             System.out.println("Demande de connexion");
             
 
@@ -46,6 +48,11 @@ public class Api extends Thread{
 
             Lieu lieu = null;
             while(lieu==null){
+                try {
+                    Thread.sleep(20);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Api.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 System.out.print("");
                 lieu = myServer.getMonLieu();
             }
@@ -71,7 +78,7 @@ public class Api extends Thread{
                 
                 test = CorrigerTrame(test);
                 
-                //System.out.println(test);
+                System.out.println(test);
                 
                 //analyse de cette trame
                 AnalyseTrame(test);
