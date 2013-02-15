@@ -24,18 +24,17 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace pref="17" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
                       <Component id="DeleteB" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="315" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jScrollPane2" min="-2" pref="385" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -62,7 +61,7 @@
         <Component class="javax.swing.JTable" name="jTable2">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    data,columns&#xa;)" type="code"/>
+              <Connection code="new  javax.swing.table.DefaultTableModel(data, columns)" type="code"/>
             </Property>
           </Properties>
           <Events>
@@ -71,7 +70,7 @@
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable()"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="columns = new String[3];&#xa;columns[0]=&quot;ID&quot;;&#xa;columns[1]=&quot;Password&quot;;&#xa;columns[2]=&quot;User Type&quot;;&#xa;        Service s = new Service();&#xa;        List&lt;Client&gt; cl = s.getAllUsers();&#xa;        data = new String[cl.size()][3];&#xa;        for (int i = 0; i &lt; cl.size(); i++) {&#xa;            data[i][0] = cl.get(i).getId();&#xa;            data[i][1] = cl.get(i).getMdp();&#xa;            data[i][2] = cl.get(i).getType().toString();&#xa;        }"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="columns = new String[3];&#xa;columns[0]=&quot;ID&quot;;&#xa;columns[1]=&quot;Hashed password&quot;;&#xa;columns[2]=&quot;User Type&quot;;&#xa;        Service s = new Service();&#xa;        List&lt;Client&gt; cl = s.getAllUsers();&#xa;        data = new String[cl.size()][3];&#xa;        for (int i = 0; i &lt; cl.size(); i++) {&#xa;            data[i][0] = cl.get(i).getId();&#xa;            data[i][1] = cl.get(i).getMdp();&#xa;            data[i][2] = cl.get(i).getType().toString();&#xa;        }"/>
           </AuxValues>
         </Component>
       </SubComponents>

@@ -16,7 +16,6 @@ import service.Service;
  * @author anisbenyoub
  */
 public class UserList extends javax.swing.JFrame {
-      javax.swing.JTable  TableUser2 ;
       String[][] data;
       String[] columns;
     /**
@@ -46,7 +45,7 @@ public class UserList extends javax.swing.JFrame {
 
         columns = new String[3];
         columns[0]="ID";
-        columns[1]="Password";
+        columns[1]="Hashed password";
         columns[2]="User Type";
         Service s = new Service();
         List<Client> cl = s.getAllUsers();
@@ -56,9 +55,7 @@ public class UserList extends javax.swing.JFrame {
             data[i][1] = cl.get(i).getMdp();
             data[i][2] = cl.get(i).getType().toString();
         }
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            data,columns
-        ));
+        jTable2.setModel(new  javax.swing.table.DefaultTableModel(data, columns));
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable2MouseClicked(evt);
@@ -84,15 +81,14 @@ public class UserList extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(layout.createSequentialGroup()
-                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(DeleteB))
-                    .add(layout.createSequentialGroup()
-                        .add(17, 17, 17)
-                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 315, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(0, 21, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(DeleteB)
+                        .addContainerGap())
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 385, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(15, 15, 15))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
