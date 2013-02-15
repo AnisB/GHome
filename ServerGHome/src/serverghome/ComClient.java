@@ -129,6 +129,7 @@ public class ComClient extends Thread {
                 }
                 else
                 {
+                    try{
                 switch (message.charAt(0)) {
                     // We are in the case of a disconnection
                     case 'D':
@@ -178,10 +179,25 @@ public class ComClient extends Thread {
                         out.println(v);
                         out.flush();
                     default:
+                        out.println("ERPROTOCOL");
+                        out.flush();
+                        myClientConnected = false;
+                        myClient.close();
+                        myHost.removeClient(myClient.getInetAddress());
                         break;
                 }
             }
+                
+                catch(ArrayIndexOutOfBoundsException ex)
+                {
+                        out.println("ERPROTOCOL");
+                        out.flush();
+                        myClientConnected = false;
+                        myClient.close();
+                        myHost.removeClient(myClient.getInetAddress());
+                }
             }
+               }
 
         } catch (IOException ex) {
             Logger.getLogger(ComClient.class.getName()).log(Level.SEVERE, null, ex);

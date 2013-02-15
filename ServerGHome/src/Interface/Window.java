@@ -84,6 +84,12 @@ public class Window extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        menuBar1 = new java.awt.MenuBar();
+        menu1 = new java.awt.Menu();
+        menu2 = new java.awt.Menu();
+        menuBar2 = new java.awt.MenuBar();
+        menu3 = new java.awt.Menu();
+        menu4 = new java.awt.Menu();
         list1 = new java.awt.List();
         jLabel1 = new javax.swing.JLabel();
         deleteButton = new javax.swing.JButton();
@@ -97,6 +103,18 @@ public class Window extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+
+        menu1.setLabel("File");
+        menuBar1.add(menu1);
+
+        menu2.setLabel("Edit");
+        menuBar1.add(menu2);
+
+        menu3.setLabel("File");
+        menuBar2.add(menu3);
+
+        menu4.setLabel("Edit");
+        menuBar2.add(menu4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -292,7 +310,6 @@ public class Window extends javax.swing.JFrame {
             fichier.print("");
             fichier.append(newMap);
             fichier.close();
-            System.out.println("Map outdated");
             myServ.obsMap();
 
         } catch (IOException ex) {
@@ -421,6 +438,12 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private java.awt.List list1;
+    private java.awt.Menu menu1;
+    private java.awt.Menu menu2;
+    private java.awt.Menu menu3;
+    private java.awt.Menu menu4;
+    private java.awt.MenuBar menuBar1;
+    private java.awt.MenuBar menuBar2;
     private javax.swing.JComboBox type1;
     private javax.swing.JComboBox type2;
     // End of variables declaration//GEN-END:variables

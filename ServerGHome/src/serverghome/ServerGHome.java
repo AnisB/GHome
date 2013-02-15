@@ -38,21 +38,18 @@ public class ServerGHome extends Thread {
     protected List<Association> mesAssociations = new ArrayList<Association>();
     protected Api monApi;
 
-    public ServerGHome() 
-    {
+    public ServerGHome() {
         nbClick = 0;
         myClientMap = new HashMap<InetAddress, ComClient>();
         serverOn = true;
         serviceManager = new Service();
     }
-    
-    public void setAPI(Api api)
-    {
-        monApi=api;
+
+    public void setAPI(Api api) {
+        monApi = api;
     }
-    
-    public Api getApi()
-    {
+
+    public Api getApi() {
         return monApi;
     }
 
@@ -62,57 +59,65 @@ public class ServerGHome extends Thread {
 
     @Override
     public void run() {
+
         try {
-            try {
-                Crafter aHomeCrafter = new Crafter("../map.xml");
-                Window uneMap = new Window(aHomeCrafter.getLieu(),this);
-                monLieu = aHomeCrafter.getLieu();
-                uneMap.setVisible(true);
-            } catch (DocumentException ex) {
-                System.out.println("Problème d'accès au fichier map");
-            }
+            Crafter aHomeCrafter = new Crafter("../map.xml");
+            Window uneMap = new Window(aHomeCrafter.getLieu(), this);
+            monLieu = aHomeCrafter.getLieu();
+            uneMap.setVisible(true);
+        } catch (DocumentException ex) {
+            System.out.println("Problème d'accès au fichier map");
+        }
+        try {
+            loadAssociations("../asso.txt");
+        } catch (FileNotFoundException ex) {
+        } catch (IOException ex) {
+        }
+
+
+        try {
             serviceManager.addClient("id", "1234");
-            ServerSocket socketserver = null;
-            BufferedReader in;
-            PrintWriter out;
+        } catch (Exception ex) {
+        }
+        ServerSocket socketserver = null;
+        BufferedReader in;
+        PrintWriter out;
 
-            try {
+        try {
 
-                socketserver = new ServerSocket(4500);
-                System.out.println("Le serveur est à l'écoute du port " + socketserver.getLocalPort());
-                while (serverOn) {
-                    System.out.println("remise en attente");
-                    Socket client;
-                    client = socketserver.accept();
-                    System.out.println("trucrecu");
-                    if (myClientMap.get(client.getInetAddress()) != null) {
-                        out = new PrintWriter(client.getOutputStream());
-                        out.println("C0");
-                        out.flush();
-                        System.out.println("Deja repertorie");
+            socketserver = new ServerSocket(4500);
+            System.out.println("Le serveur est à l'écoute du port " + socketserver.getLocalPort());
+            while (serverOn) {
+                System.out.println("remise en attente");
+                Socket client;
+                client = socketserver.accept();
+                System.out.println("trucrecu");
+                if (myClientMap.get(client.getInetAddress()) != null) {
+                    out = new PrintWriter(client.getOutputStream());
+                    out.println("C0");
+                    out.flush();
+                    System.out.println("Deja repertorie");
 
-                    } else {
-                        System.out.println("Nouveau");
-                        ComClient aNewComClient = new ComClient(socketserver, client, this);
-                        myClientMap.put(client.getInetAddress(), aNewComClient);
-                        aNewComClient.start();
-                    }
-
-
+                } else {
+                    System.out.println("Nouveau");
+                    ComClient aNewComClient = new ComClient(socketserver, client, this);
+                    myClientMap.put(client.getInetAddress(), aNewComClient);
+                    aNewComClient.start();
                 }
 
-            } catch (IOException e) {
 
-                e.printStackTrace();
             }
-            try {
-                socketserver.close();
-            } catch (IOException ex) {
-                Logger.getLogger(ServerGHome.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch (Exception ex) {
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+        try {
+            socketserver.close();
+        } catch (IOException ex) {
             Logger.getLogger(ServerGHome.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     public synchronized void removeClient(InetAddress address) {
@@ -122,7 +127,6 @@ public class ServerGHome extends Thread {
         System.out.println(myClientMap.size());
 
     }
-
 
     public Lieu getMonLieu() {
         return monLieu;
@@ -141,20 +145,22 @@ public class ServerGHome extends Thread {
         return stringBuilder.toString().replace('\r', ' ');
     }
 
-    public void addAssociation(String msg) {
+    public void addAssociation(String msg) throws FileNotFoundException, IOException {
         List<String> attributes = new ArrayList<String>();
         for (String s : msg.split(" ")) {
             attributes.add(s);
         }
-        Association newAsso = new Association(attributes,this);
+        Association newAsso = new Association(attributes, this);
         mesAssociations.add(newAsso);
+        saveAssociations("../asso.txt");
+
     }
 
     public String getAssoMsg() {
         String msg = "K";
         msg += " " + mesAssociations.size();
         for (Association a : mesAssociations) {
-            msg += a.toString();
+            msg += " " + a.toString();
         }
         return msg;
     }
@@ -167,15 +173,14 @@ public class ServerGHome extends Thread {
             Logger.getLogger(ServerGHome.class.getName()).log(Level.SEVERE, null, ex);
         }
         for (Association a : mesAssociations) {
-            if (a.test()) 
-            {
+            if (a.test()) {
                 System.out.println("Asso vérifiée");
                 a.execute();
             }
         }
     }
 
-    public synchronized boolean deleteAssociation(String assoc) {
+    public synchronized boolean deleteAssociation(String assoc) throws FileNotFoundException, IOException {
         String[] msg2 = assoc.split(" ");
         String value = "";
 
@@ -183,10 +188,11 @@ public class ServerGHome extends Thread {
             value += msg2[i] + " ";
         }
         value += msg2[msg2.length - 1];
- 
+
         for (Association a : mesAssociations) {
             if (a.toString().equals(value)) {
                 mesAssociations.remove(a);
+                saveAssociations("../asso.txt");
                 return true;
             }
         }
@@ -196,9 +202,8 @@ public class ServerGHome extends Thread {
 
     public boolean capteurExists(String ID) {
         List<Capteur> listeCapteurs = new ArrayList<Capteur>();
-        
-        for (Piece piece : monLieu.getListPieces()) 
-        {
+
+        for (Piece piece : monLieu.getListPieces()) {
             listeCapteurs.addAll(piece.getMesCapteurs());
         }
         for (Acces acc : monLieu.getListAcces()) {
@@ -212,13 +217,38 @@ public class ServerGHome extends Thread {
         }
         return false;
     }
-    
-    public synchronized void obsMap()
-    {
-                for(InetAddress i: myClientMap.keySet())
-                {
-                    myClientMap.get(i).setObsMap();
-                }
 
+    public synchronized void obsMap() {
+        for (InetAddress i : myClientMap.keySet()) {
+            myClientMap.get(i).setObsMap();
+        }
+
+    }
+
+    protected void loadAssociations(String s) throws FileNotFoundException, IOException {
+        BufferedReader br = new BufferedReader(new FileReader(s));
+        try {
+            String line = br.readLine();
+
+            while (line != null) {
+                addAssociation(line);
+                line = br.readLine();
+            }
+        } finally {
+            br.close();
+        }
+    }
+
+    protected void saveAssociations(String s) throws FileNotFoundException, IOException {
+        PrintWriter fichier;
+        try {
+            fichier = new PrintWriter(new File(s));
+            for (Association a : mesAssociations) {
+                fichier.println("A " + a.toString());
+            }
+            fichier.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
