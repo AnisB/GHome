@@ -6,7 +6,9 @@ package service;
 
 import api.Api;
 import dao.*;
+import java.util.List;
 import modele.*;
+import modele.admin.Client;
 import serverghome.ServerGHome;
 import util.JpaUtil;
 
@@ -15,8 +17,10 @@ import util.JpaUtil;
  * @author anis
  */
 public class Service {
-protected Api monApi;
+
+    protected Api monApi;
 // Méthodes relatives aux Clicks
+
     public void addClick(Click aClick) throws Exception {
         JpaUtil.openEntityManager();
         JpaUtil.getEntityManagerTransaction().begin();
@@ -35,11 +39,21 @@ protected Api monApi;
     }
 
     // Ajout d'un client
-    public void addClient(String id, String mdp) throws Exception {
+    public void addClient(String id, String mdp, Client.ClientType t) throws Exception {
         ClientDao hisClient = new ClientDao();
         JpaUtil.openEntityManager();
         JpaUtil.getEntityManagerTransaction().begin();
-        hisClient.create(id, mdp);
+        hisClient.create(id, mdp, t);
+        JpaUtil.getEntityManagerTransaction().commit();
+        JpaUtil.closeEntityManager();
+    }
+    // Ajout d'un client
+
+    public void addClient(String id, String mdp, String t) throws Exception {
+        ClientDao hisClient = new ClientDao();
+        JpaUtil.openEntityManager();
+        JpaUtil.getEntityManagerTransaction().begin();
+        hisClient.create(id, mdp, t);
         JpaUtil.getEntityManagerTransaction().commit();
         JpaUtil.closeEntityManager();
     }
@@ -170,8 +184,8 @@ protected Api monApi;
     }
 
     public void sendOrder(String idCapteur, String typeData, String optionalValue, ServerGHome s) {
-        Api  a=s.getApi();
-        a.Actionner(typeData,"FF9F1E05", optionalValue);
+        Api a = s.getApi();
+        a.Actionner(typeData, "FF9F1E05", optionalValue);
     }
 
     public void manageData(String typeData, String idCapteur, String value) throws Exception {
@@ -229,5 +243,33 @@ protected Api monApi;
         }
         JpaUtil.getEntityManagerTransaction().commit();
         JpaUtil.closeEntityManager();
+    }
+
+    public boolean checkIDAvailable(String id) {
+        JpaUtil.openEntityManager();
+        ClientDao cd = new ClientDao();
+        boolean v = !cd.checkIDExists(id);
+        JpaUtil.closeEntityManager();
+        return v;
+    }
+
+    public List<Client> getAllUsers() {
+        JpaUtil.openEntityManager();
+        ClientDao cd = new ClientDao();
+        List<Client> v = cd.getAll();
+        JpaUtil.closeEntityManager();
+        return v;
+    }
+
+    public void deleteUser(String id) throws Exception {
+        JpaUtil.openEntityManager();
+        JpaUtil.getEntityManagerTransaction().begin();
+
+        ClientDao cd = new ClientDao();
+        cd.deleteUser(id);
+        JpaUtil.getEntityManagerTransaction().commit();
+
+        JpaUtil.closeEntityManager();
+
     }
 }

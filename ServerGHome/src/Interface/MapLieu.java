@@ -17,6 +17,7 @@ public class MapLieu extends javax.swing.JPanel {
     public int selected;
     public Lieu monLieu;
     Window myWindow;
+    Integer size = 300;
     /**
      * Creates new form MapLieu
      */
@@ -66,11 +67,11 @@ public class MapLieu extends javax.swing.JPanel {
         for(int i=0; i<monLieu.nombreEtage;i++)
         {
         g.setColor(Color.lightGray);
-        g.fillRect(0 +400*i, 0, 400, 400);
+        g.fillRect(0 +size*i, 0, size, size);
         g.setColor(Color.black);
         
-        g.drawRect(0 +400*i, 0, 400, 400);
-        g.drawString("Etage "+i, 350+400*i, +350);
+        g.drawRect(0 +size*i, 0, size, size);
+        g.drawString("Etage "+i, size-50+size*i, size-50);
         g.setColor(Color.blue);
         for(Piece p:monLieu.getMesPieces().get(i))
         {
@@ -81,10 +82,10 @@ public class MapLieu extends javax.swing.JPanel {
             else
             {
                 g.setColor(Color.RED);
-            }            g.fillRect(p.getX()+400*i, p.getY(), p.largeurX, p.largeurY);
+            }            g.fillRect(p.getX()+size*i, p.getY(), p.largeurX, p.largeurY);
             g.setColor(Color.blue);
-            g.drawRect(p.getX()+400*i, p.getY(), p.largeurX, p.largeurY);
-            g.drawString(p.getNom(), p.getX()+400*i+15, p.getY()+15);
+            g.drawRect(p.getX()+size*i, p.getY(), p.largeurX, p.largeurY);
+            g.drawString(p.getNom(), p.getX()+size*i+15, p.getY()+15);
         }
         g.setColor(Color.red);
         for(Acces a:monLieu.getMesAcces().get((i)))
@@ -97,9 +98,9 @@ public class MapLieu extends javax.swing.JPanel {
             {
                 g.setColor(Color.RED);
             }
-            g.fillRect(a.getX()+400*i, a.getY(), a.taillex, a.tailley);
+            g.fillRect(a.getX()+size*i, a.getY(), a.taillex, a.tailley);
             g.setColor(Color.red);
-            g.drawRect(a.getX()+400*i, a.getY(), a.taillex, a.tailley);
+            g.drawRect(a.getX()+size*i, a.getY(), a.taillex, a.tailley);
 
         }
     }	
@@ -165,7 +166,7 @@ public class MapLieu extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 400, Short.MAX_VALUE)
+            .add(0, size, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -174,14 +175,14 @@ public class MapLieu extends javax.swing.JPanel {
     }// </editor-fold>                        
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {                                   
-        int q = (int)evt.getX()/400;
+        int q = (int)evt.getX()/size;
         Conteneur c=null;
         myWindow.getList1().removeAll();
         selected=-1;
         for(Piece p:monLieu.getMesPieces().get(q))
         {
-            if((p.getX()<(evt.getX()%400))&&(p.getY()<(evt.getY()))&&
-                    ((p.getX()+p.largeurX)>(evt.getX()%400))&&(p.getY()+p.largeurY)>(evt.getY()))
+            if((p.getX()<(evt.getX()%size))&&(p.getY()<(evt.getY()))&&
+                    ((p.getX()+p.largeurX)>(evt.getX()%size))&&(p.getY()+p.largeurY)>(evt.getY()))
             {
                 selected=p.getId();
                 c=p;
@@ -189,8 +190,8 @@ public class MapLieu extends javax.swing.JPanel {
         }
         for(Acces p:monLieu.getMesAcces().get(q))
         {
-            if((p.getX()<(evt.getX()%400))&&(p.getY()<(evt.getY()))&&
-                    ((p.getX()+p.taillex)>(evt.getX()%400))&&(p.getY()+p.tailley)>(evt.getY()))
+            if((p.getX()<(evt.getX()%size))&&(p.getY()<(evt.getY()))&&
+                    ((p.getX()+p.taillex)>(evt.getX()%size))&&(p.getY()+p.tailley)>(evt.getY()))
             {
                 selected=p.getId();
                 c=p;

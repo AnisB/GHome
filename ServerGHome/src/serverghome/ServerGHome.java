@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modele.Click;
+import modele.admin.Client;
 import modele.home.*;
 import org.dom4j.DocumentException;
 import service.Service;
@@ -76,7 +77,7 @@ public class ServerGHome extends Thread {
 
 
         try {
-            serviceManager.addClient("id", "1234");
+            serviceManager.addClient("id", "1234",Client.ClientType.ADMIN);
         } catch (Exception ex) {
         }
         ServerSocket socketserver = null;
