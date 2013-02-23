@@ -143,6 +143,14 @@ public class ComClient extends Thread {
                                 serviceManager.sendOrder(message.split(" ")[1], message.split(" ")[2], message.split(" ")[3], myHost);
                                 sendData("O1");
                                 break;
+                            case 'V':
+                                String fl=serviceManager.getMusic();
+                                sendData(fl);
+                                break;
+                            case 'P':
+                                String pm=serviceManager.playMusic(message.split("\"")[1]);
+                                sendData(pm);
+                                break;
                             case 'B':
                                 if (myHost.deleteAssociation(message)) {
                                     v = "B1";

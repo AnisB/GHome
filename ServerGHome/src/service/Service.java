@@ -6,7 +6,14 @@ package service;
 
 import api.Api;
 import dao.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.List;
+import javax.media.j3d.Clip;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
 import modele.*;
 import modele.admin.Client;
 import serverghome.ServerGHome;
@@ -270,6 +277,44 @@ public class Service {
         JpaUtil.getEntityManagerTransaction().commit();
 
         JpaUtil.closeEntityManager();
+    }
 
+    public String getMusic() {
+        try {
+            File repertoire = new File("../music");
+            File[] files = repertoire.listFiles();
+            System.out.println(files.length);
+            String fs = "V1 " + (new Integer(files.length)).toString();
+            for (File f : files) {
+                fs += (" \"" + f.getName() + "\"");
+            }
+
+            return fs;
+        } catch (Exception ex) {
+            return "V0 NOSUCHDIRECTORY";
+        }
+    }
+
+    public String playMusic(String name) {
+        String path="";
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("../conf.GHOME"));
+            try {
+                String line = br.readLine();
+
+                while (line.contains("#VLC")) {
+                    line = br.readLine();
+                }
+                path = br.readLine();
+            } finally {
+                br.close();
+            }
+            ProcessBuilder pb = new ProcessBuilder(path, "../music/" + name);
+            Process start = pb.start();
+            return "P1";
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return "P0 ERROR";
+        }
     }
 }
