@@ -25,6 +25,7 @@
 <piece id="6" nom="Grand salon" posx="0" posy="0" etage="2" largex="135" largey="150">
 <capteur id="DKZDZ" type="presence"/>
 <actionneur id="ZKZD?K" type="lumiere"/>
+<actionneur id="Kevin" type="chauffage"/>
 </piece>
 <piece id="7" nom="Chambre d'amis 2" posx="140" posy="80" etage="2" largex="140" largey="80">
 <capteur id="0001B292" type="contact"/>

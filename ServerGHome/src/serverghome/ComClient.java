@@ -36,6 +36,10 @@ public class ComClient extends Thread {
 
     public String recieveData(String rec) {
         try {
+            if (rec == null) {
+                return null;
+            }
+            rec.replace(' ', '\n');
             String plainText = AESencrp.decrypt(rec);
 
             return plainText;
@@ -49,7 +53,7 @@ public class ComClient extends Thread {
     public boolean sendData(String message) {
         try {
             String cipherText = AESencrp.encrypt(message);
-            out.println(cipherText);
+            out.println(cipherText.replace('\n', ' '));
             out.flush();
             return true;
         } catch (Exception e) {
@@ -68,7 +72,7 @@ public class ComClient extends Thread {
 
             //String de reception
             String contenu = recieveData(in.readLine());
-            
+
             //Gestion des services de persistance
             Service serviceManager = new Service();
 
@@ -90,15 +94,19 @@ public class ComClient extends Thread {
             while (myClientConnected) {
 
                 in = new BufferedReader(new InputStreamReader(myClient.getInputStream()));
-                String message = recieveData(in.readLine());
+                String predecoded = in.readLine();
+                String message = recieveData(predecoded);
 
                 if (mapUpdate == false) {
                     String map = myHost.getMap();
                     sendData("OBS " + map.replace('\n', ' '));
                     mapUpdate = true;
                 }
-                if (message.isEmpty()) {
-                    sendData("ERROR");
+                if (message == null || message.isEmpty()) {
+                    sendData("ERPROTOCOL");
+                    myClientConnected = false;
+                    myClient.close();
+                    myHost.removeClient(myClient.getInetAddress());
                 } else {
                     try {
                         switch (message.charAt(0)) {
@@ -136,16 +144,15 @@ public class ComClient extends Thread {
                                 sendData("O1");
                                 break;
                             case 'B':
-                                v = "";
                                 if (myHost.deleteAssociation(message)) {
                                     v = "B1";
                                 } else {
                                     v = "B0 NOTFOUND";
                                 }
                                 sendData(v);
+                                break;
                             default:
-                                out.println("ERPROTOCOL");
-                                out.flush();
+                                sendData("ERPROTOCOL");
                                 myClientConnected = false;
                                 myClient.close();
                                 myHost.removeClient(myClient.getInetAddress());
