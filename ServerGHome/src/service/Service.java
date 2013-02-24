@@ -295,6 +295,8 @@ public class Service {
 
     
         public String getWeather() throws UnsupportedEncodingException, MalformedURLException, IOException {
+            
+            try{
         String result="W1";
         String data = URLEncoder.encode("ptrigger2", "UTF-8") + "=" + URLEncoder.encode("10027", "UTF-8");
  
@@ -319,9 +321,11 @@ public class Service {
         }
         wr.close();
         rd.close();
-    //} catch (Exception e) {
-    //}
         return result;
+
+    } catch (Exception e) {
+        return "W0 CONNECTIONERR";
+    }
     }
 
         
