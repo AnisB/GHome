@@ -15,8 +15,7 @@ public class Capteur {
         INTERRUPTEUR,
         TEMPERATURE,
         CONTACT,
-        PRESENCE,
-        AUTRE;
+        PRESENCE;
     }
     String id;
     Piece lieu;
@@ -41,10 +40,6 @@ public class Capteur {
         else if(type.equals("contact"))
         {
              monType=Type.CONTACT;
-        }
-        else
-        {
-            monType=Type.AUTRE;
         }
     }
     public String getId() {

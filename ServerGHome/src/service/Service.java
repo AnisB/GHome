@@ -294,14 +294,14 @@ public class Service {
     }
 
     
-        public String getWeather() throws UnsupportedEncodingException, MalformedURLException, IOException {
+        public String getWeather(String cityCode) throws UnsupportedEncodingException, MalformedURLException, IOException {
             
             try{
         String result="W1";
         String data = URLEncoder.encode("ptrigger2", "UTF-8") + "=" + URLEncoder.encode("10027", "UTF-8");
  
         // Send data
-        URL url = new URL("http://weather.yahooapis.com/forecastrss?w=609125&u=c");
+        URL url = new URL("http://weather.yahooapis.com/forecastrss?w="+cityCode+"&u=c");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());

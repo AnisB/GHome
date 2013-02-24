@@ -12,9 +12,8 @@ public class Actionneur {
         public enum Type {
 
         LUMIERE,
-        CHAUFFAGE,
-        AUTRE;
-    }
+        CHAUFFAGE;
+        }
     String id;
     Piece lieu;
     Actionneur.Type monType;
@@ -29,10 +28,6 @@ public class Actionneur {
         else if(type.equals("chauffage"))
         {
              monType=Type.CHAUFFAGE;
-        }
-        else
-        {
-            monType=Type.AUTRE;
         }
     }
     public String getId() {

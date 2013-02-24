@@ -23,12 +23,12 @@ public class Lieu {
         MAISON,
         BUREAU,
         USINE,
-        ATELIER,
-        AUTRE;
+        ATELIER;
     }
     TypeLieu monType;
     String nomLieu;
     public int nombreEtage;
+    public String cityCode;
 
     public Lieu() {
         mesPieces = new HashMap<Integer, List<Piece>>();
@@ -105,7 +105,7 @@ public class Lieu {
         }
         else
         {
-            monType=TypeLieu.AUTRE;
+            monType=TypeLieu.MAISON;
         }
     
     }

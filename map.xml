@@ -1,4 +1,4 @@
-<lieu nom="myHome" type="MAISON" nbEtage="3">
+<lieu nom="myHome" type="MAISON" nbEtage="3" code="609125">
 <piece id="0" nom="Sejour" posx="0" posy="0" etage="0" largex="65" largey="100">
 <capteur id="0021CBE2" type="interrupteur"/>
 <capteur id="00893382" type="temperature"/>

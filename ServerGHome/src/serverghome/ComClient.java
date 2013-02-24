@@ -152,7 +152,7 @@ public class ComClient extends Thread {
                                 sendData(pm);
                                 break; 
                              case 'W':
-                                String wm=serviceManager.getWeather();
+                                String wm=serviceManager.getWeather(myHost.monLieu.cityCode);
                                 sendData(wm);
                                 break;
                             case 'B':

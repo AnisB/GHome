@@ -25,6 +25,7 @@ public class Accessor {
         endroit.setMonType(root.attribute("type").getValue());
         endroit.setNomLieu(root.attribute("nom").getValue());
         endroit.setNbEtage(Integer.valueOf(root.attribute("nbEtage").getValue()));
+        endroit.cityCode=root.attribute("code").getValue();
 
 
         //Parcours de toutes les sous entitées du lieu
