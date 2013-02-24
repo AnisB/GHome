@@ -6,14 +6,12 @@ package service;
 
 import api.Api;
 import dao.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.List;
-import javax.media.j3d.Clip;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
 import modele.*;
 import modele.admin.Client;
 import serverghome.ServerGHome;
@@ -295,6 +293,39 @@ public class Service {
         }
     }
 
+    
+        public String getWeather() throws UnsupportedEncodingException, MalformedURLException, IOException {
+        String result="W1";
+        String data = URLEncoder.encode("ptrigger2", "UTF-8") + "=" + URLEncoder.encode("10027", "UTF-8");
+ 
+        // Send data
+        URL url = new URL("http://weather.yahooapis.com/forecastrss?w=609125&u=c");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+ 
+        // Get the response
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        String line;
+        while ((line = rd.readLine()) != null) {
+            if(line.contains("<yweather:condition"))
+            {
+                result+=" "+line.split("\"")[1];
+                result+=" "+line.split("\"")[5];
+
+            }
+        }
+        wr.close();
+        rd.close();
+    //} catch (Exception e) {
+    //}
+        return result;
+    }
+
+        
+        
     public String playMusic(String name) {
         String path="";
         try {

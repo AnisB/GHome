@@ -150,6 +150,10 @@ public class ComClient extends Thread {
                             case 'P':
                                 String pm=serviceManager.playMusic(message.split("\"")[1]);
                                 sendData(pm);
+                                break; 
+                             case 'W':
+                                String wm=serviceManager.getWeather();
+                                sendData(wm);
                                 break;
                             case 'B':
                                 if (myHost.deleteAssociation(message)) {
